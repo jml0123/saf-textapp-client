@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Message</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <nav class="dashboard-nav">
+            <div class="nav-container">
+                <a href="index.html">
+                    <h1 class="nav-logo--dashboard">Start-a-fire 🔥</h1>
+                </a>
+                <div class="nav-wrapper--dashboard">
+                <img class="profile-img" src="https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204">
+                <ul>
+                    <li><a href="login.html">Sign Out</a></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+    <div class="dashboard">
+        <div class="create-message-wrapper">
+            <div class="message-header">
+                <h1>Edit</h1> 
+                <a href="dashboard.html"><img class="delete" src="https://logodix.com/logo/1154262.png"></a>
+            </div>
+            <form class="create-message" id="message-form">
+                <label for="content">What do you want your message to say?</label>
+                <textarea id="content" rows="4" cols="40" form="message-form"></textarea>
+                <label for="scheduled">Schedule for</label>
+                <input type="datetime" id="scheduled">
+                <div class="btn-row">
+                    <button type="button" onclick="window.location.href='dashboard.html'">Save</button>
+                    <button type="button" onclick="window.location.href='dashboard.html'">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </main>
+</body>
+</html>

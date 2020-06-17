@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <nav class="dashboard-nav">
+            <div class="nav-container">
+                    <a href="index.html">
+                        <h1 class="nav-logo--dashboard">Start-a-fire 🔥</h1>
+                    </a>
+                    <div class="nav-wrapper--dashboard">
+                    <img class="profile-img" src="https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204">
+                    <ul>
+                        <li><a href="login.html">Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+    <div class="dashboard">
+       <div class="scheduled">
+        <h1>Scheduled messages</h1>
+            <div class="scheduled-content-container">
+                <p class="day-label">Monday</p>
+                <ul>
+                    <li>
+                        <a href="edit-message.html">
+                            <div class="message-preview-container">
+                                Donate to Lorem Ipsum Dolor
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="edit-message.html">
+                            <div class="message-preview-container">
+                                Read this
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <p class="day-label">Wednesday</p>
+                <ul>
+                    <li>
+                        <a href="edit-message.html">
+                            <div class="message-preview-container">
+                                Take Care of yourself during a revolution
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <p class="day-label">Saturday</p>
+                <ul>
+                    <li>
+                        <a href="edit-message.html">
+                            <div class="message-preview-container">
+                                What to wear during today's protest
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="scheduler-console">
+            <div class="console-btn-wrapper">
+                <button type="button" onclick="window.location.href='create-message.html'">New Message</button>
+                <button disabled=true>Stats</button>
+            </div>
+        </div>
+    </div>
+    </main>
+</body>
+</html>
