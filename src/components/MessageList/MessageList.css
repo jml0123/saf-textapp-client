@@ -1,0 +1,36 @@
+
+.scheduled {
+    padding: 5%;
+    margin: 0 auto;
+}
+
+.scheduled h1 {
+    font-size: 25px;
+}
+
+.scheduled-content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.scheduled-content-container li {
+    padding: 1.33%;
+}
+.scheduled-content-container a {
+    text-decoration: none;
+}
+
+.day-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    padding: 1.33% 0;
+}
+
+.message-preview-container {
+    border: 1px solid lightgrey;
+    background: #147efb;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;;
+}

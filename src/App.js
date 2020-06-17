@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import { Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import LandingPage from "./views/LandingPage/LandingPage"
+import Login from "./views/Login/Login"
+import SignUp from "./views/SignUp/SignUp"
+import Dashboard from "./views/Dashboard/Dashboard"
+import CreateMessage from "./views/CreateMessage/CreateMessage"
+class App extends Component {
+  render() {
+    return (
+      <>
+          <Route
+            exact path='/'
+            component={LandingPage}
+          />
+          <Route
+            path='/signup'
+            component={SignUp}
+          />
+           <Route
+            path='/login'
+            component={Login}
+          />
+           <Route
+            path='/dashboard'
+            component={Dashboard}
+          />
+           <Route
+            path='/edit-message'
+            component={Dashboard}
+          />
+          <Route
+            path='/create-message'
+            component={CreateMessage}
+          />
+      </>
+    );
+  }
 }
 
 export default App;
+
+// integrate router
+// add index.js to all components

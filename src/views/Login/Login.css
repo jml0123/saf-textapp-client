@@ -1,0 +1,35 @@
+
+form input {
+    background: rgb(231, 231, 231);
+    height: 30px;
+}
+
+form textarea {
+    background: rgb(231, 231, 231);
+}
+
+.login-container {
+    margin: 0 auto;
+    width: 80%;
+    padding: 5%;
+    max-width: 800px;
+}
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.login-container form > * {
+    margin: 1.5%;
+}
+
+.login-container button {
+    margin: 8% auto;
+}
+
+.login-container #description {
+    height: 100px;
+}
+

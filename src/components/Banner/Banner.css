@@ -1,0 +1,15 @@
+
+.banner-container {
+    width: 100%;
+    height: 29vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(228,222,208);
+    background: linear-gradient(114deg, rgba(228,222,208,1) 6%, rgba(241,51,51,1) 97%);
+}
+
+.banner-content {
+    text-align: center;
+}

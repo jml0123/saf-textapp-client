@@ -1,0 +1,18 @@
+.create-message-wrapper {
+    width: 88%;
+    margin: 0 auto;
+    padding: 5%;
+}
+
+.dashboard {
+    padding: 5% 2%;
+}
+button {
+    background: white;
+    border: 2px solid lightgray;
+    min-width: 100px;
+    min-height: 25px;
+    max-width: 130px;
+    border-radius: 2px;
+    padding: 10px;
+}
