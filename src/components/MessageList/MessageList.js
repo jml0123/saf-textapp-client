@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import MessagesContext from "../../MessagesContext"
-import LoginContext from "../../LoginContext"
 import monthNames from "../../utils/Months"
 import dayNames from "../../utils/Days"
 
@@ -61,10 +60,7 @@ export default class MessageList extends Component {
                 ]
             )
         })
-        
-
-       
-     
+             
         const messages = Object.entries(messageGroup).map((date, i) => {
             // Sort by time
             date[1].sort();

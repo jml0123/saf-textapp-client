@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import MessagesContext from "../../MessagesContext"
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
 
@@ -148,7 +147,7 @@ class MessageForm extends Component {
             </>
            
         const activity = (this.props.newMessage)? "Create Message" : "Edit";
-        const twoWeeksAway = new Date(Date.now() + 12096e5)
+        // const twoWeeksAway = new Date(Date.now() + 12096e5)
         // Doesn't currently work
 
         return (
