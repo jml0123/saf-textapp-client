@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import moment from 'moment';
+
+
 import { Link } from 'react-router-dom';
 import MessagesContext from "../../MessagesContext"
 import monthNames from "../../utils/Months"
@@ -25,11 +28,11 @@ export default class MessageList extends Component {
     };
 
     getTime = (date) =>{
-        const d = new Date(date);
+        const d = moment(date, 'YYYY-MM-DD HH:mm').toDate();
         return d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     }
     convertToString = (date) => {
-        const d = new Date(`${date} 00:00`);
+        const d = moment(date, 'YYYY-MM-DD HH:mm').toDate();
 
         if (this.isToday(d)) {
             return "Today"
