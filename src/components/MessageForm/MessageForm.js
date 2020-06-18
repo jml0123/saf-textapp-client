@@ -82,28 +82,35 @@ class MessageForm extends Component {
     handleCreateMessage = e => {
         e.preventDefault()
 
+        const messageContent = this.state.message.content;
+        const messageScheduled = this.state.message.scheduled;
+
+
         const message = {
-            scheduled: this.state.message.content,
-            content: this.state.message.scheduled,
+            scheduled: messageScheduled,
+            content: messageContent,
             id: this.generateUniqueID(),
         }
 
         this.setState({error: null});
         // Make request here
         this.context.addMessage(message);
-        this.props.back();
+        this.props.history.push('/dashboard');
     }
 
 
     handleEditMessage = e => {
         e.preventDefault()
-
+        const messageContent = this.state.message.content;
+        const messageScheduled = this.state.message.scheduled;
+        const messageId = this.state.message.id;
+        
         const newData = {
-            scheduled: this.state.message.content,
-            content: this.state.message.scheduled,
-            id: this.state.message.id,
+            scheduled: messageScheduled,
+            content: messageContent,
+            id: messageId,
         }
-        console.log(this.props.id)
+       
         this.setState({error: null});
 
         // Make request here
@@ -141,6 +148,7 @@ class MessageForm extends Component {
            
         const activity = (this.props.newMessage)? "Create Message" : "Edit";
         const twoWeeksAway = new Date(Date.now() + 12096e5)
+        // Doesn't currently work
 
         return (
             <div className="create-message-wrapper">
@@ -166,7 +174,7 @@ class MessageForm extends Component {
                         // Unclear why below is required to access the property ??
                         defaultValue={this.state.message.scheduled}
                         min={Date.now()}
-                        max={twoWeeksAway}
+                    
 
                     />
                     <div className="btn-row">
