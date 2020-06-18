@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-
-
 import { Link } from 'react-router-dom';
+
 import MessagesContext from "../../MessagesContext"
 import monthNames from "../../utils/Months"
 import dayNames from "../../utils/Days"
@@ -14,6 +13,7 @@ export default class MessageList extends Component {
     static contextType = MessagesContext;
 
     // Add Date functions to one file
+    
     isToday = (date) => {
         const today = new Date()
         return date.getDate() === today.getDate() &&
@@ -28,12 +28,15 @@ export default class MessageList extends Component {
     };
 
     getTime = (date) =>{
-        const d = moment(date, 'YYYY-MM-DD HH:mm').toDate();
-        return d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        let d = moment(date).format();
+        d = new Date(d);
+
+        return moment(d).format('LT');
     }
     convertToString = (date) => {
-        const d = moment(date, 'YYYY-MM-DD HH:mm').toDate();
-
+        let d = moment(date).format();
+        d = new Date(d);
+        
         if (this.isToday(d)) {
             return "Today"
         }
@@ -41,7 +44,7 @@ export default class MessageList extends Component {
         if (this.isTomorrow(d)) {
             return "Tomorrow"
         }
-        return `${dayNames[d.getDay()]}, ${monthNames[d.getMonth()]} ${(d.getDate())}`
+        return `${moment(d).format('dddd')}, ${moment(d).format('MMMM DD')}`;
     }
 
     render(){
