@@ -38,13 +38,15 @@ class MessageForm extends Component {
     }
 
     invalidDate() {
-        const date = Date.parse(this.state.message.scheduled);
-        const currentDate = Date.now();
-        if (isNaN(date) === false) {
-            var d = new Date(date);
+        let date = moment(this.state.message.scheduled);
+        date = moment(date, "YYYY-MM-DDTHH:mm:ssZ")
+        const currentDate = moment().format
+        if (isNaN(date) === true) {
+            //var d = new Date(date);
+            return true;
         }
-        else return true;
-        return (d < currentDate);
+        //else return true;
+        return (date < currentDate);
     }
     
     disabledSubmit() {

@@ -15,43 +15,51 @@ export default class MessageList extends Component {
     // Add Date functions to one file
 
     isToday = (date) => {
-        const today = new Date()
-        return date.getDate() === today.getDate() &&
-            date.getMonth() === today.getMonth() &&
-            date.getFullYear() === today.getFullYear();
+        let d = moment(date);
+        d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
+        const today = moment().format()
+        //(moment(d).format("DD"))
+        //console.log(moment(today).format("DD"))
+
+
+        return moment(d).format("DD") === moment(today).format("DD") &&
+            moment(d).format("MM") === moment(today).format("MM") &&
+            moment(d).format("YYYY") === moment(today).format("YYYY");
     };
     isTomorrow = (date) => {
-        const tomorrow = new Date()
-        return date.getDate() === tomorrow.getDate() + 1 &&
-            date.getMonth() === tomorrow.getMonth() &&
-            date.getFullYear() === tomorrow.getFullYear();
+        let d = moment(date);
+        d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
+        const tomorrow = moment().format()
+        return moment(d).format("DD") === moment(tomorrow).format("DD") + 1 &&
+               moment(d).format("MM") === moment(tomorrow).format("MM") &&
+               moment(d).format("YYYY") === moment(tomorrow).format("YYYY");
     };
 
     getTime = (date) =>{
         let d = moment(date);
         d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
-        console.log(d.format())
-        return `${d.format()}`;
-        //return moment(d).format('LT');
+        //console.log(d.format())
+        //return `${d.format()}`;
+        return moment(d).format('LT');
     }
     convertToString = (date) => {
         let d = moment(date);
         
         d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
-        console.log(d)
+        //console.log(d)
         
-        /*if (this.isToday(d)) {
+        if (this.isToday(d)) {
             return "Today"
         }
 
         if (this.isTomorrow(d)) {
             return "Tomorrow"
-        }*/
+        }
 
-        console.log(d.format())
-        return `${d.format()}`;
+        //console.log(d.format())
+        //return `${d.format()}`;
 
-        //return `${moment(d).format('dddd')}, ${moment(d).format('MMMM DD')}`;
+        return `${moment(d).format('dddd')}, ${moment(d).format('MMMM DD')}`;
     }
 
     render(){
@@ -125,7 +133,6 @@ export default class MessageList extends Component {
         // Probably need pagination
         return (
             <div className="scheduled">
-                <p>TEST {moment('2013-03-01', 'YYYY-MM-DD').format()}</p>
                 <h1 className="label">Scheduled messages</h1>
                     <div className="scheduled-content-container">
                         {messages}
