@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import moment from 'moment';
+
 import MessagesContext from "../../MessagesContext"
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
 
@@ -131,6 +133,7 @@ class MessageForm extends Component {
     render(){
         // Handle submit on Save and on Create
         // Push history on cancel
+        const now = moment(new Date()).format('YYYY-MM-DDTHH:mm')
         const messageFormBtns = (this.props.newMessage)? 
              <> 
                 <button 
@@ -174,6 +177,7 @@ class MessageForm extends Component {
                         onChange = {e => this.updateSchedule(e.target.value)} 
                         // Unclear why below is required to access the property ??
                         defaultValue={this.state.message.scheduled}
+                        placeholder={now}
                         min={Date.now()}
                     />
                     <div className="btn-row">
