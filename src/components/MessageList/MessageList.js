@@ -13,7 +13,7 @@ export default class MessageList extends Component {
     static contextType = MessagesContext;
 
     // Add Date functions to one file
-    
+
     isToday = (date) => {
         const today = new Date()
         return date.getDate() === today.getDate() &&
@@ -28,26 +28,34 @@ export default class MessageList extends Component {
     };
 
     getTime = (date) =>{
-        let d = moment(date).format();
-        d = new Date(d);
-
-        return moment(d).format('LT');
+        let d = moment(date);
+        d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
+        console.log(d.format())
+        return `${d.format()}`;
+        //return moment(d).format('LT');
     }
     convertToString = (date) => {
-        let d = moment(date).format();
-        d = new Date(d);
+        let d = moment(date);
         
-        if (this.isToday(d)) {
+        d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
+        console.log(d)
+        
+        /*if (this.isToday(d)) {
             return "Today"
         }
 
         if (this.isTomorrow(d)) {
             return "Tomorrow"
-        }
-        return `${moment(d).format('dddd')}, ${moment(d).format('MMMM DD')}`;
+        }*/
+
+        console.log(d.format())
+        return `${d.format()}`;
+
+        //return `${moment(d).format('dddd')}, ${moment(d).format('MMMM DD')}`;
     }
 
     render(){
+
         let dates = []
         let messageGroup = {}
         const getDates = () => {
@@ -117,6 +125,7 @@ export default class MessageList extends Component {
         // Probably need pagination
         return (
             <div className="scheduled">
+                <p>TEST {moment('2013-03-01', 'YYYY-MM-DD').format()}</p>
                 <h1 className="label">Scheduled messages</h1>
                     <div className="scheduled-content-container">
                         {messages}
