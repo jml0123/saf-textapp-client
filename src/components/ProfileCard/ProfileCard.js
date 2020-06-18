@@ -5,7 +5,7 @@ export default class ProfileCard extends Component {
     render(){
         return (
             <div class="curator-container">
-            <img src={this.props.profileImg} class="profile-img"/>
+            <img src={this.props.profileImg} class="profile-img" alt="Profile"/>
             <div class="curator-cta">
                 <div class="curator-profile">
                     <h1>{this.props.name}</h1>

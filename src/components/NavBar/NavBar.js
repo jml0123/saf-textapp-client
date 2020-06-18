@@ -8,7 +8,7 @@ export default function NavBar(props) {
        <nav>
            <div className="nav-container">
                 <Link to="/">
-                    <h1 className="nav-logo">Start-a-fire 🔥</h1>
+                    <h1 className="nav-logo">Start-a-fire <span role="img" aria-label="Fire">🔥</span></h1>
                 </Link>
                 <div className="nav-wrapper">
                 <ul>

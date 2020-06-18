@@ -1,37 +1,110 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import MessagesContext from "../../MessagesContext"
+import monthNames from "../../utils/Months"
+import dayNames from "../../utils/Days"
 
 import "./MessageList.css"
 
 export default class MessageList extends Component {
-    render(){
     
-        const messages = (this.props.messages).map(message => {
-            const date = (message.date === Date.now()) ? "Today"
-                : (message.date === Date.now() + 1) ? "Tomorrow"
-                : message.date;
-            // Put below in a separate component!
+    static contextType = MessagesContext;
+
+    // Add Date functions to one file
+    isToday = (date) => {
+        const today = new Date()
+        return date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear();
+    };
+    isTomorrow = (date) => {
+        const tomorrow = new Date()
+        return date.getDate() === tomorrow.getDate() + 1 &&
+            date.getMonth() === tomorrow.getMonth() &&
+            date.getFullYear() === tomorrow.getFullYear();
+    };
+
+    convertToString = (date) => {
+        const d = new Date(`${date} 00:00`);
+
+        if (this.isToday(d)) {
+            return "Today"
+        }
+
+        if (this.isTomorrow(d)) {
+            return "Tomorrow"
+        }
+        return `${dayNames[d.getDay()]}, ${monthNames[d.getMonth()]} ${(d.getDate())}`
+    }
+
+    render(){
+        let dates = []
+        let messageGroup = {}
+        const getDates = () => {
+            (this.context.messages).forEach(message =>{
+                const dateWithoutTime= message.scheduled.split("T")[0]
+                if(!dates.includes(dateWithoutTime)) {
+                    dates = [...dates, dateWithoutTime]
+                }})
+                dates.sort();
+        }
+        getDates();
+
+        messageGroup = dates.reduce((date1, date2) => (date1[date2] = [], date1), {});
+        
+        (this.context.messages).forEach(message =>{
+            const dateWithoutTime= message.scheduled.split("T")[0]
             return (
-                    <>
-                    <Link to="/edit-message/:id">
-                        <p class="day-label">{date}</p>
-                        <ul>
-                            <li>
-                                <a href="edit-message.html">
-                                    <div class="message-preview-container">
-                                        {message.content}
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </Link>
-                    </>
+                messageGroup[dateWithoutTime] = [
+                    ...messageGroup[dateWithoutTime], message
+                ]
             )
-        })  
+        })
+        
+
+       
+     
+        const messages = Object.entries(messageGroup).map((date, i) => {
+            // Sort by time
+            date[1].sort();
+            const messagesOnThisDate = date[1].map((message, i)=> {
+               
+                return (
+                    <React.Fragment key={i}>
+                    <Link to={
+                        {   
+                            pathname: `/edit-message/${message.id}`,
+                            state: {
+                                content: `${message.content}`,
+                                scheduled: message.scheduled,
+                                id: message.id,
+                        }
+                    }}>
+                        <li>   
+                                <div className="message-preview-container">
+                                   <p>{message.content}</p>
+                                </div>
+                            </li>
+                    </Link>
+                    </React.Fragment>
+                
+            )})
+              // Put below in a separate component!
+            return (
+                <React.Fragment key={i}>
+                    <p className="day-label">{this.convertToString(date[0])}:</p>
+                    <ul>
+                        {messagesOnThisDate}
+                    </ul>
+                </React.Fragment>
+            )   
+
+        })
+        // Probably need pagination
         return (
-            <div class="scheduled">
+            <div className="scheduled">
                 <h1>Scheduled messages</h1>
-                    <div class="scheduled-content-container">
+                    <div className="scheduled-content-container">
                         {messages}
                     </div>
             </div>
@@ -39,38 +112,7 @@ export default class MessageList extends Component {
     }
 }
 
-
-// Client should parse object and group by date e.g.
-
-/*
-Date1: {
-    [
-        message: {},
-        message: {},
-    ]
-},
-
-Date2: {
-      [
-        message: {},
-        message: {},
-    ]
-}
-*/
-
 MessageList.defaultProps = {
     messages: [
-        {
-            date: "Monday",
-            content: "Donate to Lorem Ipsum Dolor"
-        },
-        {
-            date: "Wednesday",
-            content: "Take Care of yourself during a revolution"
-        },
-        {
-            date: "Saturday",
-            content: "What to wear during today's protest"
-        },
     ]
 }
