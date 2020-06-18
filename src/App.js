@@ -67,7 +67,7 @@ class App extends Component {
       },
       {
           name: "Jane Doe",
-          profileImg: "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204",
+          profileImg: "https://thumbs.dreamstime.com/b/punk-girl-avatar-violet-hair-flat-74541226.jpg",
           description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
           id: 2,
       },

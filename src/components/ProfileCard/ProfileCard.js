@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import "./ProfileCard.css"
 
 export default class ProfileCard extends Component {
+  
     render(){
         return (
             <div className="curator-container">
@@ -23,8 +24,4 @@ export default class ProfileCard extends Component {
     }
 }
 
-ProfileCard.defaultProps = {
-    name: "John Doe",
-    profileImg: "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco"
-}
+ProfileCard.defaultProps = {}

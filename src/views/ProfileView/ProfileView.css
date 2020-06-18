@@ -8,6 +8,21 @@
     font-weight: bold;
 }
 
+
+.curator-container {
+    text-align: left;
+    border: 2px solid lightgrey;
+    min-height: 250px;
+    display: flex;
+
+    width: 100%;
+    align-items: center;
+    margin: 1.66% 0;
+    position: relative;
+}
+
+
+
 @media (min-width: 768px)  {
     .section-heading {
         max-width: 75%;

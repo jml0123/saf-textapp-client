@@ -14,6 +14,7 @@ export default class CuratorList extends Component {
                     key={i}
                     name={curator.name}
                     description ={curator.description}
+                    profileImg = {curator.profileImg}
                 />
             )
         })  
