@@ -12,8 +12,7 @@ export default function NavBar(props) {
                 </Link>
                 <div className="nav-wrapper">
                 <ul>
-                    <li><Link to="/signup">Curators</Link></li>
-                    <li><Link to="/login">Sign In</Link></li>
+                    <li><Link to="/login">Curators</Link></li>
                 </ul>
                 </div>
             </div>

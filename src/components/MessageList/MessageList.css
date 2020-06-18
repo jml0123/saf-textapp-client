@@ -33,6 +33,10 @@
     border-bottom: 2px solid black;
 }
 
+.time-label {
+    color: black;
+    font-size: 88%;
+}
 .message-preview-container {
     margin: 0 auto;
     background-color: #1982FC;

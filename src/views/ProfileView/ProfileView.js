@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from "../../components/NavBar/NavBar";
+import Banner from "../../components/Banner/Banner";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 import UsersContext from "../../UsersContext";
@@ -15,12 +16,13 @@ export default class ProfileView extends Component{
             <>
                 <header>
                     <NavBar/>
+                    <Banner/>
                 </header>
                 <main>
-                    <div className="curator-wrapper">
-                        <h1 className="section-heading">
+                    <h1 className="section-heading">
                             Custom text messages and news from thought leaders, curators and revolutionaries
-                        </h1>
+                    </h1>
+                    <div className="curator-wrapper">
                         <ProfileCard name={userInfo.name} description ={userInfo.description} profileImg = {userInfo.profileImg} />
                     </div>
                 </main>

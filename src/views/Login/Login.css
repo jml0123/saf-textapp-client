@@ -10,9 +10,9 @@ form textarea {
 
 .login-container {
     margin: 0 auto;
-    width: 80%;
+    width: 70%;
     padding: 5%;
-    max-width: 800px;
+    max-width: 500px;
 }
 .login-container form{
     display: flex;
@@ -25,3 +25,22 @@ form textarea {
     margin: 1.5%;
 }
 
+.btn-row {
+    display: flex;
+    align-items: center;
+}
+
+.sign-up-prompt{
+
+    padding: 0;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 15px;
+    color: black;
+}
+.sign-up-prompt .signup{
+    color: #1982FC;;
+}
+.sign-up-prompt .signup:hover {
+    text-decoration: underline;
+}

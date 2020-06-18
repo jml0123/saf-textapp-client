@@ -18,19 +18,24 @@ class App extends Component {
 
   state = {
       messages: [
-        {
-            scheduled: "2020-06-18T09:00",
-            content: "Donate to Lorem Ipsum Dolor",
+          {
+              scheduled: "2020-06-18T23:00",
+              content: "Today was hard fought",
+              id: 1,
+              curator_id: 1,
+          },
+          {
+            scheduled: "2020-06-18T23:30",
+            content: "Get some rest",
             id: 1,
             curator_id: 1,
         },
-        {
-          scheduled: "2020-06-18T11:00",
-          content: "Read this",
-          id: 4,
-          curator_id: 1,
-      },
-        
+          {
+            scheduled: "2020-06-19T11:00",
+            content: "Read this",
+            id: 4,
+            curator_id: 1,
+        },
         {
             scheduled: "2020-06-22T09:00",
             content: "Take Care of yourself during a revolution",

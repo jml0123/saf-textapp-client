@@ -24,6 +24,10 @@ export default class MessageList extends Component {
             date.getFullYear() === tomorrow.getFullYear();
     };
 
+    getTime = (date) =>{
+        const d = new Date(date);
+        return d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
     convertToString = (date) => {
         const d = new Date(`${date} 00:00`);
 
@@ -63,7 +67,13 @@ export default class MessageList extends Component {
              
         const messages = Object.entries(messageGroup).map((date, i) => {
             // Sort by time
-            date[1].sort();
+ 
+            date[1].sort(function(a, b) {
+                let date1 = new Date(a.scheduled);
+                let date2 = new Date(b.scheduled)
+                return date1.getTime() - date2.getTime();
+            });
+           
             const messagesOnThisDate = date[1].map((message, i)=> {
                
                 return (
@@ -77,7 +87,8 @@ export default class MessageList extends Component {
                                 id: message.id,
                         }
                     }}>
-                        <li>   
+                            <li> 
+                                <p className="time-label">{this.getTime(message.scheduled)}</p>
                                 <div className="message-preview-container">
                                    <p>{message.content}</p>
                                 </div>

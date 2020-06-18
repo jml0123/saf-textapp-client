@@ -22,9 +22,12 @@ export default class Login extends Component {
                         <input type="text" id="e-mail"/>
                         <label htmlFor="e-mail">Password</label>
                         <input type="password" id="password"/>
-                        <Link to ="/dashboard">
-                            <button type="button">Login</button>
-                        </Link>
+                        <div className="btn-row">
+                            <Link to ="/dashboard">
+                                <button type="button">Login</button>
+                            </Link>
+                        </div>  
+                        <p className="sign-up-prompt">Don't have an account? <Link to ="/signup"><span className="signup">Sign up</span></Link></p>
                     </form>
                 </div>
                 </main>
