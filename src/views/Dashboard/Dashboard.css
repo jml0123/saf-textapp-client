@@ -1,12 +1,15 @@
 
 .dashboard-container {
-    padding: 5% 2%;
+    padding: 5% 2% 0 2%;
+    margin: 0;
 }
 
 .console-btn-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 0 5%;
 }
 
 @media (min-width: 768px)  {

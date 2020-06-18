@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import MessagesContext from "../../MessagesContext"
+import LoginContext from "../../LoginContext"
 import monthNames from "../../utils/Months"
 import dayNames from "../../utils/Days"
 
@@ -103,7 +104,7 @@ export default class MessageList extends Component {
         // Probably need pagination
         return (
             <div className="scheduled">
-                <h1>Scheduled messages</h1>
+                <h1 className="label">Scheduled messages</h1>
                     <div className="scheduled-content-container">
                         {messages}
                     </div>

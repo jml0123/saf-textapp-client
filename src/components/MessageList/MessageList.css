@@ -21,11 +21,15 @@
     text-decoration: none;
 }
 
+.label {
+    padding: 0 5%;
+    margin: 0;
+}
 .day-label {
     font-size: 20px;
     font-weight: bold;
     margin: 0;
-    padding: 1.33% 0;
+    padding: 0.13em 0;
     border-bottom: 2px solid black;
 }
 
@@ -39,5 +43,4 @@
 .message-preview-container p {
     color: white;
     padding: 8px 0.75em;
-
 }

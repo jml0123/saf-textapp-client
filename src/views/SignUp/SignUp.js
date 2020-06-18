@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 import Banner from "../../components/Banner/Banner";
 import NavBar from "../../components/NavBar/NavBar";
@@ -14,16 +15,18 @@ export default class SignUp extends Component {
                     <Banner/>
                 </header>
                 <main className="LandingPage">
-                <div class="login-container">
+                <div className="login-container">
                     <form id="login">
                         <h1>Sign-Up</h1>
-                        <label for="e-mail">E-mail</label>
+                        <label htmlFor="e-mail">E-mail</label>
                         <input type="text" id="e-mail"/>
-                        <label for="e-mail">Password</label>
+                        <label htmlFor="e-mail">Password</label>
                         <input type="password" id="password"/>
-                        <label for="description">Why do you want to be an activist?</label>
+                        <label htmlFor="description">Why do you want to be an activist?</label>
                         <textarea id="description" rows="4" cols="40" form="login"></textarea>
-                        <button type="button">Submit</button>
+                        <Link to ="/dashboard">
+                            <button type="button">Submit</button>
+                        </Link>
                     </form>
                 </div>
                 </main>

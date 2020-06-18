@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import ProfileCard from "../ProfileCard/ProfileCard";
+import UsersContext from "../../UsersContext"
 import "./CuratorList.css"
 
 export default class CuratorList extends Component {
+    static contextType = UsersContext;
+
+
     render(){
-        const curators = (this.props.curators).map(curator => {
+        const curators = (this.context.users).map((curator,i) => {
             return (
                 <ProfileCard 
+                    key={i}
                     name={curator.name}
                     description ={curator.description}
                 />
@@ -22,20 +27,5 @@ export default class CuratorList extends Component {
 
 CuratorList.defaultProps = {
     curators: [
-        {
-            name: "John Doe",
-            profileImg: "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco"
-        },
-        {
-            name: "Jane Doe",
-            profileImg: "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco"
-        },
-        {
-            name: "Rodney Wyatt",
-            profileImg: "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco"
-        },
     ]
 }

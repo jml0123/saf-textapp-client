@@ -11,7 +11,8 @@ export default function DashNavBar(props) {
                     <h1 className="nav-logo--dashboard">Start-a-fire  <span role="img" aria-label="Fire">🔥</span></h1>
                 </Link>
                 <div className="nav-wrapper--dashboard">
-                    <img className="profile-img" src={props.profileImg} alt="Profile"/>
+                    <img className="profile-img" src={props.user.active.user.profileImg} alt="Profile"/>
+                    <p className="userName">{props.user.active.user.name}</p>
                     <ul>
                         <li><Link to="/login">Sign Out</Link></li>
                     </ul>
@@ -24,6 +25,3 @@ export default function DashNavBar(props) {
 // Context should be user image
 
 
-DashNavBar.defaultProps = {
-    profileImg: "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
-}

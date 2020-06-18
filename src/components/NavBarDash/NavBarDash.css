@@ -1,7 +1,7 @@
-
 .dashboard-nav {
-    height: 66px;
-    background: rgb(240, 239, 236);
+    height: 75px;
+    background: rgb(245, 245, 244);
+    border-bottom: 1.33px solid rgb(196, 196, 196)
 }
 
 .nav-container {
@@ -17,10 +17,6 @@
 
 .nav-wrapper--dashboard ul {
     list-style-type: none;
-}
-
-.dashboard-nav {
-    background: rgb(240, 239, 236);
 }
 
 .nav-logo--dashboard {
@@ -45,6 +41,25 @@
 }
 
 .nav-wrapper--dashboard img {
-    height: 33px;
-    width: 33px;
+    min-height: 33px;
+    max-height: 40px;
+    width: auto;
+    border-radius: 100%;
+    margin: 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.userName {
+    display: none;
+}
+
+
+
+@media (min-width: 768px)  {
+   .userName{
+       display: inline-block;
+   }
+   .nav-wrapper--dashboard img {
+        margin: 0 1em;
+   }
 }

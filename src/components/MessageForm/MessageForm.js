@@ -85,11 +85,11 @@ class MessageForm extends Component {
         const messageContent = this.state.message.content;
         const messageScheduled = this.state.message.scheduled;
 
-
         const message = {
             scheduled: messageScheduled,
             content: messageContent,
             id: this.generateUniqueID(),
+            curator_id: this.props.user.active.user.id
         }
 
         this.setState({error: null});
@@ -97,7 +97,6 @@ class MessageForm extends Component {
         this.context.addMessage(message);
         this.props.history.push('/dashboard');
     }
-
 
     handleEditMessage = e => {
         e.preventDefault()
@@ -109,6 +108,7 @@ class MessageForm extends Component {
             scheduled: messageScheduled,
             content: messageContent,
             id: messageId,
+            curator_id: this.props.user.active.user.id
         }
        
         this.setState({error: null});
@@ -130,20 +130,21 @@ class MessageForm extends Component {
     }
 
     render(){
-
         // Handle submit on Save and on Create
         // Push history on cancel
-        const newMessageBtns = (this.props.newMessage)?  <> 
-            <button 
-                type="button" 
-                disabled={this.disabledSubmit()}
-                onClick={this.handleCreateMessage}>
-                Create Message
-            </button> 
-        </>
-            : <>
+        const messageFormBtns = (this.props.newMessage)? 
+             <> 
+                <button 
+                    type="button" 
+                    disabled={this.disabledSubmit()}
+                    onClick={this.handleCreateMessage}>
+                    Create Message
+                </button> 
+            </>
+            : 
+            <>
                 <button type="button"  onClick={this.handleEditMessage} disabled={this.disabledSubmit() || this.invalidDate()}>Save</button>
-                <Link to ="/dashboard"><button type="button">Cancel</button></Link>
+                <button type="button" onClick={this.handleClickCancel}>Cancel</button>
             </>
            
         const activity = (this.props.newMessage)? "Create Message" : "Edit";
@@ -165,6 +166,7 @@ class MessageForm extends Component {
                         form="message-form" 
                         onChange = {e => this.updateContent(e.target.value)}
                         defaultValue={this.state.message.content}
+                        placeholder="Engage your base"
                     ></textarea>
                     <label htmlFor="scheduled">Schedule for</label>
                     <input 
@@ -174,11 +176,9 @@ class MessageForm extends Component {
                         // Unclear why below is required to access the property ??
                         defaultValue={this.state.message.scheduled}
                         min={Date.now()}
-                    
-
                     />
                     <div className="btn-row">
-                        {newMessageBtns}
+                        {messageFormBtns}
                     </div>
                 </form>
             </div>

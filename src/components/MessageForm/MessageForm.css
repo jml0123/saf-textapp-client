@@ -10,8 +10,6 @@
     padding: 1.33% 0;
 }
 
-
-
 .btn-row {
     padding: 5%;
     display: flex;
@@ -45,8 +43,8 @@
 
 #content {
     padding: 8px 0.75em;
-    background-color: #1982FC;
-    color: white;
+    background: #FAFAFA;
+    color: black;
     font-size: 95%;
     border-radius: 5px;
     height: auto;

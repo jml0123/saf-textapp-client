@@ -2,6 +2,7 @@
 nav {
     height: 66px;
     background: #0f0f0f;
+    border: none;
 }
 
 .nav-container {

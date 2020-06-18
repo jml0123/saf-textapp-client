@@ -1,0 +1,15 @@
+.section-heading {
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 32px;
+    padding: 6%;
+    width: 95%;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+@media (min-width: 768px)  {
+    .section-heading {
+        max-width: 75%;
+    }
+}
