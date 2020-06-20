@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import config from '../../config';
+import TokenService from '../../services/token-service'
 
 import MessagesContext from "../../MessagesContext"
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
@@ -89,8 +90,8 @@ class MessageForm extends Component {
             method: 'POST',
             body: JSON.stringify(message),
             headers: {
-                'content-type': 'application/json'
-                // no authorization required
+                'content-type': 'application/json',
+                'authorization': `basic ${TokenService.getAuthToken()}`
             }
         })
         .then(res => {
@@ -128,7 +129,7 @@ class MessageForm extends Component {
           body: JSON.stringify(newData),
           headers: {
             'content-type': 'application/json',
-            // No auth required
+            'authorization': `basic ${TokenService.getAuthToken()}`
           }
         })
         .then(res => {
@@ -160,7 +161,7 @@ class MessageForm extends Component {
             method: 'DELETE', 
             headers: {
                 'content-type': 'application/json',
-                // No auth required
+                'authorization': `basic ${TokenService.getAuthToken()}`
             }
         })
         .then(res => {

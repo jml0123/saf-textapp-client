@@ -5,6 +5,7 @@ import moment from 'moment';
 import { Link, Router } from 'react-router-dom';
 import DashNavBar from "../../components/NavBarDash/NavBarDash";
 import MessageList from "../../components/MessageList/MessageList";
+import TokenService from '../../services/token-service'
 
 import MessagesContext from "../../MessagesContext"
 import LoginContext from "../../LoginContext"
@@ -22,36 +23,57 @@ export default class Dashboard extends Component {
         queuedMessages: [],
   
         // Active state should rest in dashboard
-        active: {
-            user: {
-                id: 1,
-                username: "jayjay@email.com",
-                full_name: "Jay Jay Client side",
-                profile_img_link: "https://pbs.twimg.com/profile_images/1153833970112454656/mR3L_Hxa.png",
-                profile_description: "Testing client side"
-            }
-        }, 
+        active: [],
         error: null
     }
     
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/messages/curator/${this.state.active.user.id}`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json',
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.status)
+      this.getUserData()
+      this.getMessages()
+    
+    }
+
+
+    getUserData = () => {
+      fetch(`${config.API_ENDPOINT}/users`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `basic ${TokenService.getAuthToken()}`
         }
-        return res.json()
       })
-      .then(messages => {
-        this.setMessages(messages)
-        this.setPendingMessages(messages)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(res.status)
+          }
+          return res.json()
+        })
+        .then(user => {
+          this.setActiveUser(user)
+        })
+        .catch(error => this.setState({ error }))
+    }
+
+    
+    getMessages = () => {
+      fetch(`${config.API_ENDPOINT}/messages/curator/${this.state.active.id}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `basic ${TokenService.getAuthToken()}`
+        }
       })
-      .catch(error => this.setState({ error }))
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(res.status)
+          }
+          return res.json()
+        })
+        .then(messages => {
+          this.setMessages(messages)
+          this.setPendingMessages(messages)
+        })
+        .catch(error => this.setState({ error }))
     }
 
     setMessages = messages => {
@@ -67,6 +89,13 @@ export default class Dashboard extends Component {
       })
       this.setState({
         queuedMessages,
+        error: null
+      })
+    }
+
+    setActiveUser = active => {
+      this.setState({
+        active,
         error: null
       })
     }
@@ -99,10 +128,10 @@ export default class Dashboard extends Component {
     
     render(){
 
-        console.log(this.state)
+       console.log(this.state)
 
         const MessagesContextVal = {
-            messages: this.state.messages.filter(message => message.curator_id === this.state.active.user.id),
+            messages: this.state.messages,
             deleteMessage: this.deleteMessage,
             addMessage: this.addMessage,
             editMessage: this.editMessage
@@ -111,22 +140,25 @@ export default class Dashboard extends Component {
             active: this.state.active.user
         }
         console.log(this.state) 
+        
+        const renderMessageList = (this.state.messages !== [])?  <MessageList activeUser ={this.state.active}/> : null
+        
         return (
             <>
                 <LoginContext.Provider value= {LoginContextVal}>
                     <MessagesContext.Provider value= {MessagesContextVal}>
                     <header>
-                        <DashNavBar user={this.state.active.user}/>
+                        <DashNavBar user={this.state.active}/>
                     </header>
                     <main className="Dashboard">
                         <div className="dashboard-container">
-                            <MessageList activeUser ={this.state.active.user}/>
+                            {renderMessageList}
                         </div>
                         <div className="scheduler-console">
                             <div className="console-btn-wrapper">
                                 <Link to ={
                                   {pathname: `/create-message`,
-                                   state: {activeUser: this.state.active.user}}}>
+                                   state: {activeUser: this.state.active}}}>
                                     <button type="button">
                                         New Message
                                     </button>

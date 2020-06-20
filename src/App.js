@@ -15,6 +15,9 @@ import LoginContext from "./LoginContext"
 
 import ProfileView from './views/ProfileView/ProfileView';
 
+import PrivateRoute from './utils/PrivateRoute'
+import PublicOnlyRoute from './utils/PublicOnlyRoute'
+
 class App extends Component {
 
   state = {
@@ -58,15 +61,15 @@ class App extends Component {
       <>
         <UsersContext.Provider value = {usersContextVal}>
             <Route
-              exact path='/'
+              exact path={'/'}
               component={LandingPage}
             />
         </UsersContext.Provider>
-          <Route
+            <PublicOnlyRoute
               path='/signup'
               component={SignUp}
             />
-            <Route
+            <PublicOnlyRoute
               path='/login'
               component={Login}
             />
@@ -74,15 +77,15 @@ class App extends Component {
               path='/profile/:id'
               component={ProfileView}
             />
-          <Route
+          <PrivateRoute
             path='/dashboard'
             component={Dashboard}
           />
-           <Route
+           <PrivateRoute
             path='/edit-message/:id'
             component={EditMessage}
           />
-          <Route
+          <PrivateRoute
             path='/create-message'
             component={CreateMessage}
           />

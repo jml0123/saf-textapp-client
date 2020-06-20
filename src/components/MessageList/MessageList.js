@@ -70,6 +70,7 @@ export default class MessageList extends Component {
     }
     
     render(){
+        console.log(this.context.messages)
         let dates = []
         let messageGroup = {}
         const getDates = () => {
