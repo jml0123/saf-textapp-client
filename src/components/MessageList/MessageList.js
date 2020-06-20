@@ -7,9 +7,15 @@ import monthNames from "../../utils/Months"
 import dayNames from "../../utils/Days"
 
 import "./MessageList.css"
+import LoginContext from '../../LoginContext';
 
 export default class MessageList extends Component {
     
+
+    state = {
+        activeUser: this.props.activeUser
+    }
+
     static contextType = MessagesContext;
 
     // Add Date functions to one file
@@ -37,15 +43,16 @@ export default class MessageList extends Component {
 
     getTime = (date) =>{
         let d = moment(date);
-        d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
+        d =  moment.utc(d).local().format("YYYY-MM-DDTHH:mm:ssZ")
         //console.log(d.format())
         //return `${d.format()}`;
         return moment(d).format('LT');
     }
+
     convertToString = (date) => {
         let d = moment(date);
         
-        d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
+        d = moment.utc(d).local().format("YYYY-MM-DDTHH:mm:ssZ")
         //console.log(d)
         
         if (this.isToday(d)) {
@@ -61,9 +68,8 @@ export default class MessageList extends Component {
 
         return `${moment(d).format('dddd')}, ${moment(d).format('MMMM DD')}`;
     }
-
+    
     render(){
-
         let dates = []
         let messageGroup = {}
         const getDates = () => {
@@ -79,6 +85,7 @@ export default class MessageList extends Component {
         messageGroup = dates.reduce((date1, date2) => (date1[date2] = [], date1), {});
         
         (this.context.messages).forEach(message =>{
+            //const convertedToLocal = moment.utc(message).local().format()
             const dateWithoutTime= message.scheduled.split("T")[0]
             return (
                 messageGroup[dateWithoutTime] = [
@@ -89,42 +96,44 @@ export default class MessageList extends Component {
              
         const messages = Object.entries(messageGroup).map((date, i) => {
             // Sort by time
- 
             date[1].sort(function(a, b) {
                 let date1 = new Date(a.scheduled);
                 let date2 = new Date(b.scheduled)
                 return date1.getTime() - date2.getTime();
             });
            
-            const messagesOnThisDate = date[1].map((message, i)=> {
-               
+            const pendingMessages = date[1].map((message, i)=> {
+                // Indicate not queued if time has passed
+                const notQueued =(moment(message.scheduled).utc() > moment().utc()) 
+                ? "message-preview-container"
+                : "message-preview-container sent"
                 return (
                     <React.Fragment key={i}>
                     <Link to={
                         {   
                             pathname: `/edit-message/${message.id}`,
                             state: {
-                                content: `${message.content}`,
+                                content: message.content,
                                 scheduled: message.scheduled,
-                                id: message.id,
+                                messageId: message.id,
+                                activeUser: this.state.activeUser
                         }
                     }}>
                             <li> 
                                 <p className="time-label">{this.getTime(message.scheduled)}</p>
-                                <div className="message-preview-container">
+                                <div className={notQueued}>
                                    <p>{message.content}</p>
                                 </div>
                             </li>
                     </Link>
                     </React.Fragment>
-                
             )})
               // Put below in a separate component!
             return (
                 <React.Fragment key={i}>
                     <p className="day-label">{this.convertToString(date[0])}:</p>
                     <ul>
-                        {messagesOnThisDate}
+                        {pendingMessages}      
                     </ul>
                 </React.Fragment>
             )   

@@ -43,8 +43,15 @@
     border-radius: 20px;
     width: 100%;
     box-shadow: 1.5px 1.5px 10px rgba(90, 90, 90, 0.20);
-}
-.message-preview-container p {
     color: white;
+}
+
+.sent {
+    box-shadow: 1.5px 1.5px 2px rgba(90, 90, 90, 0.20);
+    background-color: #E9E9EB; 
+    color: #0f0f0f;
+}
+
+.message-preview-container p {
     padding: 8px 0.75em;
 }

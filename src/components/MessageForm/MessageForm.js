@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import moment from 'moment';
+import config from '../../config';
 
 import MessagesContext from "../../MessagesContext"
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
@@ -10,24 +11,11 @@ class MessageForm extends Component {
     static contextType = MessagesContext
     state = {
         message: {
-            content: "",
-            scheduled: "",
-            id: this.props.id,
+            content: this.props.content || "",
+            scheduled: this.props.scheduled || "",
+            id: this.props.id || "",
         },
         error: null
-    }
-
-    componentDidMount() {
-        if (!this.props.newMessage) {
-            this.setState({
-                message: {
-                    content: this.props.content,
-                    scheduled: this.props.scheduled,
-                    id: this.props.id,
-                },
-                error: null
-            })
-        }
     }
 
     invalidNoContent() {
@@ -66,15 +54,20 @@ class MessageForm extends Component {
 
     updateContent(messageContent) {
         this.setState({message: {
-            scheduled: this.state.message.scheduled, content: messageContent
+            scheduled: this.state.message.scheduled, 
+            content: messageContent,
+            id: this.state.message.id
         }});
     }
 
     updateSchedule(messageSchedule) {
         this.setState({message: {
-            content: this.state.message.content, scheduled: messageSchedule
+            content: this.state.message.content, 
+            scheduled: moment(messageSchedule).local().format(),
+            id: this.state.message.id
             }
         });
+        console.log(this.state.message)
     }
 
     // Remove once hooked up to server
@@ -84,23 +77,40 @@ class MessageForm extends Component {
     
     handleCreateMessage = e => {
         e.preventDefault()
-
         const messageContent = this.state.message.content;
         const messageScheduled = this.state.message.scheduled;
-
         const message = {
             scheduled: messageScheduled,
             content: messageContent,
-            id: this.generateUniqueID(),
-            curator_id: this.props.user.active.user.id
+            curator_id: this.props.activeUser.id
         }
-
-        this.setState({error: null});
-        // Make request here
-        this.context.addMessage(message);
-        this.props.history.push('/dashboard');
+        this.setState({error: null})
+        fetch(`${config.API_ENDPOINT}/messages`, {
+            method: 'POST',
+            body: JSON.stringify(message),
+            headers: {
+                'content-type': 'application/json'
+                // no authorization required
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                return res.json().then(error => {
+                    throw error
+                })
+            }
+            return res.json()
+        })
+        .then(message=> {
+            this.setState({error: null});
+            // Make request here
+            this.context.addMessage(message);
+            this.props.history.push('/dashboard');
+        })
+        .catch(err => {
+            console.error(err)
+        })
     }
-
     handleEditMessage = e => {
         e.preventDefault()
         const messageContent = this.state.message.content;
@@ -110,31 +120,69 @@ class MessageForm extends Component {
         const newData = {
             scheduled: messageScheduled,
             content: messageContent,
-            id: messageId,
-            curator_id: this.props.user.active.user.id
+            id: messageId
         }
-       
-        this.setState({error: null});
-
-        // Make request here
-        this.context.editMessage(newData, this.props.id)
-        this.props.history.push('/dashboard');
+        this.setState({ error: null })
+        fetch(`${config.API_ENDPOINT}/messages/${messageId}`, {
+          method: 'PATCH',
+          body: JSON.stringify(newData),
+          headers: {
+            'content-type': 'application/json',
+            // No auth required
+          }
+        })
+        .then(res => {
+            if (!res.ok) {
+                return res.json().then(error => {
+                    throw error
+                })
+            }
+        })
+        .then(editedMessage => {
+            this.context.editMessage(editedMessage, this.props.id)
+            this.props.history.push('/dashboard');
+        })
+        .catch(err => {
+            console.error(err)
+        })
     }
-
 
     handleClickCancel = () => {
         this.props.history.push('/dashboard')
     }
 
     handleDeleteMessage(messageId) {
-        // Add Requests here
-        this.context.deleteMessage(messageId);
-        this.props.history.push('/dashboard');
+        if(this.props.newMessage){
+            this.props.history.push('/dashboard');
+            return
+        }
+        fetch(`${config.API_ENDPOINT}/messages/${messageId}`, {
+            method: 'DELETE', 
+            headers: {
+                'content-type': 'application/json',
+                // No auth required
+            }
+        })
+        .then(res => {
+            if(!res.ok) {
+                return res.json().then(error => {
+                    throw error
+                })
+            }
+            return res
+        })
+        .then(() => {
+            // No data is passed on delete
+            this.context.deleteMessage(messageId);
+            this.props.history.push('/dashboard');
+        })
+        .catch(err => {
+            console.error(err)
+        })      
     }
 
     render(){
-        // Handle submit on Save and on Create
-        // Push history on cancel
+        console.log(this.state)
         const now = moment(new Date()).format('YYYY-MM-DDTHH:mm')
         const messageFormBtns = (this.props.newMessage)? 
              <> 
@@ -154,7 +202,6 @@ class MessageForm extends Component {
         const activity = (this.props.newMessage)? "Create Message" : "Edit";
         // const twoWeeksAway = new Date(Date.now() + 12096e5)
         // Doesn't currently work
-
         return (
             <div className="create-message-wrapper">
             <div className="message-header">
@@ -178,7 +225,7 @@ class MessageForm extends Component {
                         id="scheduled" 
                         onChange = {e => this.updateSchedule(e.target.value)} 
                         // Unclear why below is required to access the property ??
-                        defaultValue={this.state.message.scheduled}
+                        defaultValue={moment(this.state.message.scheduled).format("YYYY-MM-DD[T]HH:mm:ss")}
                         placeholder={now}
                         min={Date.now()}
                     />

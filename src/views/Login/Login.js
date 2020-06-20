@@ -7,6 +7,12 @@ import NavBar from "../../components/NavBar/NavBar";
 import "./Login.css"
 
 export default class Login extends Component {
+    
+    handleSubmit = (ev) => {
+        const { userName, password } = ev.target
+     
+    }
+    
     render(){
         return (
             <>
@@ -16,7 +22,7 @@ export default class Login extends Component {
                 </header>
                 <main className="LandingPage">
                 <div className="login-container">
-                    <form id="login">
+                    <form id="login" onSubmit={this.handleSubmit}>
                         <h1>Sign-in</h1>
                         <label htmlFor="e-mail">E-mail</label>
                         <input type="text" id="e-mail"/>
