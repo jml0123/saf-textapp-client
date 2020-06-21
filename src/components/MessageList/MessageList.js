@@ -11,11 +11,6 @@ import LoginContext from '../../LoginContext';
 
 export default class MessageList extends Component {
     
-
-    state = {
-        activeUser: this.props.activeUser
-    }
-
     static contextType = MessagesContext;
 
     // Add Date functions to one file
@@ -51,7 +46,6 @@ export default class MessageList extends Component {
 
     convertToString = (date) => {
         let d = moment(date);
-        
         d = moment.utc(d).local().format("YYYY-MM-DDTHH:mm:ssZ")
         //console.log(d)
         
@@ -70,12 +64,13 @@ export default class MessageList extends Component {
     }
     
     render(){
-        console.log(this.context.messages)
+        console.log(this.props.activeUser)
         let dates = []
         let messageGroup = {}
         const getDates = () => {
             (this.context.messages).forEach(message =>{
-                const dateWithoutTime= message.scheduled.split("T")[0]
+                const localizedDate = moment.utc(message.scheduled).local().format()
+                const dateWithoutTime= localizedDate.split("T")[0]
                 if(!dates.includes(dateWithoutTime)) {
                     dates = [...dates, dateWithoutTime]
                 }})
@@ -86,8 +81,8 @@ export default class MessageList extends Component {
         messageGroup = dates.reduce((date1, date2) => (date1[date2] = [], date1), {});
         
         (this.context.messages).forEach(message =>{
-            //const convertedToLocal = moment.utc(message).local().format()
-            const dateWithoutTime= message.scheduled.split("T")[0]
+            const localizedDate = moment.utc(message.scheduled).local().format()
+            const dateWithoutTime= localizedDate.split("T")[0]
             return (
                 messageGroup[dateWithoutTime] = [
                     ...messageGroup[dateWithoutTime], message
@@ -102,7 +97,8 @@ export default class MessageList extends Component {
                 let date2 = new Date(b.scheduled)
                 return date1.getTime() - date2.getTime();
             });
-           
+           console.log(date)
+
             const pendingMessages = date[1].map((message, i)=> {
                 // Indicate not queued if time has passed
                 const notQueued =(moment(message.scheduled).utc() > moment().utc()) 
@@ -117,7 +113,7 @@ export default class MessageList extends Component {
                                 content: message.content,
                                 scheduled: message.scheduled,
                                 messageId: message.id,
-                                activeUser: this.state.activeUser
+                                activeUser: this.props.activeUser
                         }
                     }}>
                             <li> 

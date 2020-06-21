@@ -12,13 +12,12 @@ export default class CreateMessage extends Component {
         activeUser: this.props.location.state.activeUser
     }
     render () {   
-      
         return (
             <LoginContext.Consumer> 
                 {active => (
                     <>
                     <header>
-                        <DashNavBar user={active}/>
+                        <DashNavBar user={this.state.activeUser}/>
                     </header>
                     <main className="dashboard">
                         <MessageForm 

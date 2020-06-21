@@ -91,7 +91,7 @@ class MessageForm extends Component {
             body: JSON.stringify(message),
             headers: {
                 'content-type': 'application/json',
-                'authorization': `basic ${TokenService.getAuthToken()}`
+                'authorization': `bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => {
@@ -129,7 +129,7 @@ class MessageForm extends Component {
           body: JSON.stringify(newData),
           headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`
           }
         })
         .then(res => {
@@ -161,7 +161,7 @@ class MessageForm extends Component {
             method: 'DELETE', 
             headers: {
                 'content-type': 'application/json',
-                'authorization': `basic ${TokenService.getAuthToken()}`
+                'authorization': `bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => {

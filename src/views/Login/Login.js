@@ -1,35 +1,50 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service'
+import AuthApiService from '../../services/auth-api-service'
 
 import Banner from "../../components/Banner/Banner";
 import NavBar from "../../components/NavBar/NavBar";
+
 
 import "./Login.css"
 
 export default class Login extends Component {
 
     // refactor login form to component 
+    state = {error: null}
 
-    handleLoginSuccess = path => {
-        const { location, history } = this.props
-        const destination = (location.state || {}).from || `/${path}`
-        history.push(destination)
-    }
+  
 
     // Need to create login failed situation
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.setState({error: null})
         const { username, password } = e.target
+    
+        AuthApiService.postLogin({
+                username: username.value,
+                password: password.value,
+            }         
+            ).then(res => {
+                username.value = ''
+                password.value = ''
+                TokenService.saveAuthToken(res.authToken)
+                console.log(res)
+                this.handleLoginSuccess("dashboard")
+            }).catch(res => {
+                this.setState({ error: res.error })
+          })
+          
+    }
+      
+    
 
-        TokenService.saveAuthToken(
-            TokenService.makeBasicAuthToken(username.value, password.value)
-        )
-        
-        username.value = ''
-        password.value = ''
-        this.handleLoginSuccess("dashboard")
+    handleLoginSuccess = path => {
+        const { location, history } = this.props
+        const destination = (location.state || {}).from || `/${path}`
+        history.push(destination)
     }
     
 

@@ -39,7 +39,7 @@ export default class Dashboard extends Component {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'authorization': `basic ${TokenService.getAuthToken()}`
+          'authorization': `bearer ${TokenService.getAuthToken()}`
         }
       })
         .then(res => {
@@ -60,7 +60,7 @@ export default class Dashboard extends Component {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'authorization': `basic ${TokenService.getAuthToken()}`
+          'authorization': `bearer ${TokenService.getAuthToken()}`
         }
       })
         .then(res => {
@@ -128,8 +128,7 @@ export default class Dashboard extends Component {
     
     render(){
 
-       console.log(this.state)
-
+      
         const MessagesContextVal = {
             messages: this.state.messages,
             deleteMessage: this.deleteMessage,
@@ -139,8 +138,8 @@ export default class Dashboard extends Component {
         const LoginContextVal = {
             active: this.state.active.user
         }
-        console.log(this.state) 
-        
+        console.log(this.state)
+
         const renderMessageList = (this.state.messages !== [])?  <MessageList activeUser ={this.state.active}/> : null
         
         return (

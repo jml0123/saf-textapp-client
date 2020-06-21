@@ -32,7 +32,7 @@ export default class SignUp extends Component {
             profile_img_link.value = ''
             profile_description.value = ''
             console.log(user)
-            handleSuccess("login")
+            this.handleRegistrationSuccess("login")
         })
         .catch(res => {
             this.setState({error: res.error})
