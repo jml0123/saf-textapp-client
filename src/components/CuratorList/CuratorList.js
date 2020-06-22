@@ -8,7 +8,6 @@ export default class CuratorList extends Component {
     static contextType = UsersContext;
   
     render(){
-        console.log(this.context)
         const curators = (this.context.users).map((curator,i) => {
             return (
                 <ProfileCard 
