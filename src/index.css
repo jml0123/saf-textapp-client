@@ -26,6 +26,7 @@ a {
   text-decoration: none;
 }
 
-main {
-  min-height: 100vh;
+.error-msg p{
+  color: red;
+  font-style: italic;
 }

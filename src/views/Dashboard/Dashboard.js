@@ -5,6 +5,7 @@ import moment from 'moment';
 import { Link, Router } from 'react-router-dom';
 import DashNavBar from "../../components/NavBarDash/NavBarDash";
 import MessageList from "../../components/MessageList/MessageList";
+import EditUserForm from "../../components/EditUserForm/EditUserForm";
 import TokenService from '../../services/token-service'
 
 import MessagesContext from "../../MessagesContext"
@@ -17,24 +18,23 @@ import "./Dashboard.css"
 
 export default class Dashboard extends Component {
     state = {
-
         messages: [],
-        // Messages state should rest in dashboard
         queuedMessages: [],
-  
-        // Active state should rest in dashboard
         active: [],
+        editUserToggle: false,
         error: null
     }
-    
+
   componentDidMount() {
-      this.getUserData()
-      this.getMessages()
-    
-    }
+    this.fetchAllData()
+  }
 
+  fetchAllData = async() => {
+    const userData = await this.getUserData();
+    const messages = this.getMessages(this.state.active.id);
+  }
 
-    getUserData = () => {
+    getUserData = async () => {
       fetch(`${config.API_ENDPOINT}/users`, {
         method: 'GET',
         headers: {
@@ -50,13 +50,21 @@ export default class Dashboard extends Component {
         })
         .then(user => {
           this.setActiveUser(user)
+          return user
         })
         .catch(error => this.setState({ error }))
     }
 
-    
-    getMessages = () => {
-      fetch(`${config.API_ENDPOINT}/messages/curator/${this.state.active.id}`, {
+
+    setActiveUser = active => {
+      this.setState({
+        ...this.state,
+        active
+      })
+    }
+
+    getMessages = curator_id => {
+      fetch(`${config.API_ENDPOINT}/messages/curator/${curator_id}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -78,8 +86,8 @@ export default class Dashboard extends Component {
 
     setMessages = messages => {
         this.setState({
-          messages,
-          error: null
+          ...this.state,
+          messages
         })
     }
     
@@ -88,21 +96,14 @@ export default class Dashboard extends Component {
         return moment.utc(message.scheduled).format() > moment.utc().format()
       })
       this.setState({
-        queuedMessages,
-        error: null
+        ...this.state,
+        queuedMessages
       })
     }
-
-    setActiveUser = active => {
-      this.setState({
-        active,
-        error: null
-      })
-    }
-      
     addMessage = message => {
         this.setState({
-        messages: [...this.state.messages, message]
+          ...this.state,
+          messages: [...this.state.messages, message]
         })
     }
 
@@ -111,7 +112,8 @@ export default class Dashboard extends Component {
         message => message.id !== messageId
         )
         this.setState({
-        messages: newMessages
+          ...this.state,
+          messages: newMessages
         })
     }
 
@@ -122,13 +124,25 @@ export default class Dashboard extends Component {
         : msg
         )
         this.setState({
+             ...this.state,
             messages: newMessages
         })
     }
-    
-    render(){
 
-      
+    toggleEditView = () => {
+      this.setState({
+        ...this.state,
+        editUserToggle: !this.state.editUserToggle
+      })
+      return this.state.editUserToggle
+    }
+    handleDeleteUser = () => {
+      this.props.history.push('/')
+    }
+    editUser = () => {
+      this.props.history.push('/dashboard')
+    }
+    render(){
         const MessagesContextVal = {
             messages: this.state.messages,
             deleteMessage: this.deleteMessage,
@@ -136,12 +150,23 @@ export default class Dashboard extends Component {
             editMessage: this.editMessage
           }
         const LoginContextVal = {
-            active: this.state.active.user
+            active: this.state.active.user,
+            toggleEditView: this.toggleEditView,
+            editUser: this.editUser,
+            deleteUser: this.handleDeleteUser
         }
         console.log(this.state)
 
         const renderMessageList = (this.state.messages !== [])?  <MessageList activeUser ={this.state.active}/> : null
         
+        const editUserView = (this.state.editUserToggle)?  
+          <EditUserForm 
+            user = {this.state.active}
+            onDeleteUser = {this.handleDeleteUser}
+            toggleEditView = {this.toggleEditView}
+          />
+          : ""
+
         return (
             <>
                 <LoginContext.Provider value= {LoginContextVal}>
@@ -150,6 +175,7 @@ export default class Dashboard extends Component {
                         <DashNavBar user={this.state.active}/>
                     </header>
                     <main className="Dashboard">
+                        {editUserView}
                         <div className="dashboard-container">
                             {renderMessageList}
                         </div>
@@ -164,6 +190,7 @@ export default class Dashboard extends Component {
                                 </Link>
                             </div>
                         </div>
+                        
                     </main>
                     </MessagesContext.Provider>
                 </LoginContext.Provider>

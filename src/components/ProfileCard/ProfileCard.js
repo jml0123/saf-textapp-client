@@ -5,13 +5,46 @@ import "./ProfileCard.css"
 export default class ProfileCard extends Component {
 
     state = {
-        error: null
+        error: null,
+        subscriberCount: null
     }
+
     validatePhoneNumber(number){
         const US_PHONE_PATTERN = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
         return US_PHONE_PATTERN.test(number);
     }
+    componentDidMount() {
+        this.getNumberOfSubs(this.props.curator_id)
+    }
 
+    getNumberOfSubs = curator_id => {
+        fetch(`${config.API_ENDPOINT}/subscribers/curator/${curator_id}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                //No Auth required
+            }
+            })
+            .then(res => {
+                if (!res.ok) {
+                throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(count => {
+                const countToInt = count[0].count
+                this.setNumberOfSubs(countToInt)
+                console.log(countToInt)
+            })
+            .catch(error => this.setState({ error }))
+    }
+
+    setNumberOfSubs = count => {
+        this.setState({
+            ...this.state.error,
+            subscriberCount: count
+        })
+    }
     handleAddSubscriber = e => {
         e.preventDefault()
         
@@ -50,13 +83,12 @@ export default class ProfileCard extends Component {
         .catch(error =>
             this.setState({error}))
     };
-  
-
-    // On subscribe, add number to curator-id
-    //POST REQUEST
-
+    
     render(){
-
+        const subscriberCount = (!this.state.subscriberCount || this.state.subscriberCount == 0) ? 
+        20 + Math.floor(Math.random() * 100) 
+        : this.state.subscriberCount;
+        
         const userImg = (this.props.profileImg === null)? 
             "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
             : this.props.profileImg
@@ -67,10 +99,13 @@ export default class ProfileCard extends Component {
             </div>
             <div className="curator-cta">
                 <div className="curator-profile">
-                    <h1>{this.props.name}</h1>
+                    <div className="curator-profile-heading">
+                        <h1>{this.props.name}</h1>
+                        <h1 className="subs-count">{subscriberCount} <span role="img" aria-label="Fire">🔥</span></h1>
+                    </div>
                     <p>{this.props.description}</p>
                 </div>
-                <div className="subscribe-container">
+                <div className="phone-num-container">
                     <form onSubmit = {this.handleAddSubscriber}>
                         <div className="phone-num-input">
                             <input type="text" value="+1" className="country-code" readOnly/>

@@ -17,6 +17,7 @@ import ProfileView from './views/ProfileView/ProfileView';
 
 import PrivateRoute from './utils/PrivateRoute'
 import PublicOnlyRoute from './utils/PublicOnlyRoute'
+import EditUserForm from './components/EditUserForm/EditUserForm';
 
 class App extends Component {
 
@@ -40,22 +41,30 @@ class App extends Component {
       })
       .then(this.setTopUsers)
       .catch(error => this.setState({ error }))
-      //console.log(this.state.users)
+
   }
 
   setTopUsers = users => {
-    this.setState({
+    this.setState({ 
+      ...this.state.error,
       users,
-      error: null
+    })
+  }
+
+  updateUserList = newUser => {
+    console.log(newUser)
+    this.setState({
+      ...this.state.error,
+      users: [...this.state.users, newUser],
     })
   }
 
   render() {
     const usersContextVal = {
       users: this.state.users,
+      updateUserList: this.updateUserList
     }
 
-    //console.log(this.state)
 
     return (
       <>
@@ -64,11 +73,11 @@ class App extends Component {
               exact path={'/'}
               component={LandingPage}
             />
-        </UsersContext.Provider>
             <PublicOnlyRoute
               path='/signup'
               component={SignUp}
             />
+          </UsersContext.Provider>
             <PublicOnlyRoute
               path='/login'
               component={Login}
@@ -89,6 +98,7 @@ class App extends Component {
             path='/create-message'
             component={CreateMessage}
           />
+       
       </>
     );
   }

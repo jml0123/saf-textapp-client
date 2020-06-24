@@ -4,6 +4,7 @@ import Banner from "../../components/Banner/Banner";
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 import CuratorList from "../../components/CuratorList/CuratorList";
+
 import "./LandingPage.css"
 
 export default function LandingPage(){

@@ -45,8 +45,9 @@ export default class UnsubscribeForm extends Component {
         })
         .then(data => {
             const deleteResult = (data.deleteCount === 1) ? `Successfully unsubscribed from ${data.deleteCount} curator`
+            : (data.deleteCount === 0) ? `No curators to unsubscribe to!`
             : `Successfully unsubscribed from ${data.deleteCount} curators`
-
+       
             this.setState({result: deleteResult})
         })
         .catch(error =>

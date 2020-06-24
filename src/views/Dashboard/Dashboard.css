@@ -13,6 +13,22 @@
     margin-bottom: 5%;
 }
 
+.share-profile-wrapper {
+    display: flex; 
+    flex-direction: column;
+    width: 200px;
+    align-items: center
+}
+
+.share-profile-img-container {
+    max-width: 50px;
+    max-height: 50px;
+}
+.share-profile-img {
+    width: 100%;
+    cursor: pointer;
+}
+
 @media (min-width: 768px)  {
     .scheduled {
         max-width: 66%;
