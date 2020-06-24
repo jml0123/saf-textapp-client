@@ -64,7 +64,6 @@ export default class MessageList extends Component {
     }
     
     render(){
-        console.log(this.props.activeUser)
         let dates = []
         let messageGroup = {}
         const getDates = () => {
@@ -97,7 +96,6 @@ export default class MessageList extends Component {
                 let date2 = new Date(b.scheduled)
                 return date1.getTime() - date2.getTime();
             });
-           console.log(date)
 
             const pendingMessages = date[1].map((message, i)=> {
                 // Indicate not queued if time has passed
@@ -108,7 +106,7 @@ export default class MessageList extends Component {
                     <React.Fragment key={i}>
                     <Link to={
                         {   
-                            pathname: `/edit-message/${message.id}`,
+                            pathname: `dashboard/edit-message/${message.id}`,
                             state: {
                                 content: message.content,
                                 scheduled: message.scheduled,

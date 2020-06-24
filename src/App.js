@@ -5,9 +5,9 @@ import config from './config';
 import LandingPage from "./views/LandingPage/LandingPage"
 import Login from "./views/Login/Login"
 import SignUp from "./views/SignUp/SignUp"
-import Dashboard from "./views/Dashboard/Dashboard"
 import CreateMessage from "./views/CreateMessage/CreateMessage"
 import EditMessage from "./views/EditMessage/EditMessage"
+import Admin from "./components/Admin/Admin"
 
 import MessagesContext from "./MessagesContext"
 import UsersContext from "./UsersContext"
@@ -17,7 +17,6 @@ import ProfileView from './views/ProfileView/ProfileView';
 
 import PrivateRoute from './utils/PrivateRoute'
 import PublicOnlyRoute from './utils/PublicOnlyRoute'
-import EditUserForm from './components/EditUserForm/EditUserForm';
 
 class App extends Component {
 
@@ -86,19 +85,14 @@ class App extends Component {
               path='/profile/:id'
               component={ProfileView}
             />
+
           <PrivateRoute
             path='/dashboard'
-            component={Dashboard}
+            component={Admin}
           />
-           <PrivateRoute
-            path='/edit-message/:id'
-            component={EditMessage}
-          />
-          <PrivateRoute
-            path='/create-message'
-            component={CreateMessage}
-          />
-       
+
+    
+          
       </>
     );
   }

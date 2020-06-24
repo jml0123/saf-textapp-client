@@ -15,25 +15,13 @@ export default class EditMessage extends Component{
     }
 
     render(){
-    console.log(this.state)
     return (
-        <LoginContext.Consumer> 
-            {active => (
-                <>
-                <header>
-                    <DashNavBar user = {this.state.activeUser}/>
-                </header>
-                <main className="dashboard">
-                    <MessageForm 
-                        content = {this.state.content} 
-                        scheduled = {this.state.scheduled} 
-                        id={this.state.id}
-                        activeUser = {this.state.activeUser}
-                        />  
-                </main>
-                </>
-            )}
-        </LoginContext.Consumer> 
-    )
+        <MessageForm 
+            content = {this.state.content} 
+            scheduled = {this.state.scheduled} 
+            id={this.state.id}
+            activeUser = {this.state.activeUser}
+            />       
+        )
     }
 }

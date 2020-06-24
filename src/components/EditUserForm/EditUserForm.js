@@ -25,7 +25,7 @@ export default class EditUserForm extends Component {
             error: null,
             copiedLink: false
         }
-        this.wrapperRef = React.createRef();
+        this.containerRef = React.createRef();
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ export default class EditUserForm extends Component {
     }
 
     handleClickOutside = (e) => {
-        if (this.wrapperRef && !this.wrapperRef.current.contains(e.target)) {
+        if (this.containerRef && !this.containerRef.current.contains(e.target)) {
             this.props.toggleEditView()
         }
     }
@@ -162,8 +162,8 @@ export default class EditUserForm extends Component {
 
         return(
 
-            <div className="edit-wrapper" ref={this.wrapperRef}>
-                <div className="edit-container">
+            <div className="edit-wrapper" >
+                <div className="edit-container" ref={this.containerRef}>
                 <button type="button" onClick={this.props.toggleEditView} className="btn-cancel">X</button>
                 <form id="edit-user" name="edit-user" onSubmit={this.handleEditUser}>
                     <h1>{this.props.user.full_name}</h1>
@@ -179,7 +179,7 @@ export default class EditUserForm extends Component {
                     <input type="text" id="profile_img_link" name="profile_img_link" defaultValue={this.props.user.profile_img_link} onChange={e => this.updateProfileImg(e)}/>`
                     <label htmlFor="profile_description">Activist Bio</label>
                     <textarea id="profile_description" rows="4" cols="40" form="edit-user" name="profile_description" defaultValue={this.props.user.profile_description} onChange={e => this.updateProfileDesc(e)}></textarea>
-                    <button type="button" type="submit" disabled={this.disabledSubmit} >Submit</button>
+                    <button type="button" type="submit" disabled={this.disabledSubmit()} >Submit</button>
                     <div className="share-profile-wrapper">
                         <div className="share-profile-img-container">
                             <img className="share-profile-img" src="https://image.flaticon.com/icons/png/512/25/25419.png" onClick={this.handleCopy}/>
