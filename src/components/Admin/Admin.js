@@ -148,7 +148,6 @@ export default class Admin extends Component {
     
     
     render(){
-        console.log(TokenService.getAuthToken())
         const MessagesContextVal = {
             messages: this.state.messages,
             deleteMessage: this.deleteMessage,

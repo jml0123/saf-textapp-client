@@ -72,7 +72,6 @@ export default class DemoAdmin extends Component {
                 throw error
             })
         }
-        console.log("Successfully deleted")
         return res
     })
     .catch(err => console.log(err))
@@ -86,7 +85,6 @@ export default class DemoAdmin extends Component {
   }
   
   deleteDemoMessage = async messageId => {
-    console.log("deleting")
     fetch(`${config.API_ENDPOINT}/messages/${messageId}`, {
         method: 'DELETE', 
         headers: {
@@ -103,12 +101,9 @@ export default class DemoAdmin extends Component {
         return res
     })
     .then(res => {
-        console.log("deleted")
         return 
     })
-    .catch(err => {
-        console.error(err)
-    })      
+    .catch(err => console.error(err))      
   }
 
     getUserData = async () => {
@@ -145,8 +140,6 @@ export default class DemoAdmin extends Component {
             ...this.state,
             subscriptionId: subscriber.id
         })
-
-        console.log(this.state)
     }
 
     getMessages = async curator_id => {
