@@ -87,7 +87,7 @@ export default class SignUp extends Component {
             <>
                 <header>
                     <NavBar/>
-                    <Banner subheading="Activate your base"/>
+                    <Banner subheading="Activate your base" small={true}/>
                 </header>
                 <main className="LandingPage">
                 <div className="login-container">
@@ -102,13 +102,13 @@ export default class SignUp extends Component {
                         <label htmlFor="username">Username</label>
                         <input type="text" id="username" name="username"/>
                         <label htmlFor="e-mail">Password</label>
-                        <input type="password" id="password" name="password"/>
+                        <input type="password" id="password" name="password" placeholder="8+ characters"/>
                         <label htmlFor="full_name">Full Name</label>
                         <input type="text" id="full_name" name="full_name"/>
-                        <label htmlFor="profile_img_link">Link a profile image here (must be hosted online)</label>
-                        <input type="text" id="profile_img_link" name="profile_img_link" onChange={e => this.changeImageState(e)}/>`
+                        <label htmlFor="profile_img_link" >Link a profile image here (must be hosted online)</label>
+                        <input type="text" id="profile_img_link" placeholder="(e.g. https://i.ya-webdesign.com/images/profile-avatar-png-15.png)" name="profile_img_link" onChange={e => this.changeImageState(e)}/>
                         <label htmlFor="profile_description">Activist Bio</label>
-                        <textarea id="profile_description" rows="4" cols="40" form="register" name="profile_description"></textarea>
+                        <textarea id="profile_description" rows="4" cols="40" form="register" name="profile_description" placeholder="How do you want the world to see you?"></textarea>
                         <button type="button" type="submit">Submit</button>
                     </form>
                 </div>

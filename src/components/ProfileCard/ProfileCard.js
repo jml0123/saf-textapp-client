@@ -98,6 +98,7 @@ export default class ProfileCard extends Component {
                 subscriberCount: parseInt(this.state.subscriberCount) + 1
             })
             if (this.props.callback){
+                console.log(`running ${this.props.callback} callback`)
                 this.props.callback(data)
             }
         })
@@ -133,7 +134,7 @@ export default class ProfileCard extends Component {
                             <input type="text" value="+1" className="country-code" readOnly/>
                             <input type="text" placeholder="XXX-XXX-XXXX" ref={input => this.phone_number = input} name="phone_number"/>
                         </div>
-                        <button type="submit">Subscribe</button>
+                        <button className="phone-commit-btn" type="submit">{(this.state.result) ? "Subscribed!" : "Subscribe"}</button>
                     </form>
                     <div className="result-container">{this.state.result}</div>
                 </div>

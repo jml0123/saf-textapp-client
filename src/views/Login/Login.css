@@ -25,19 +25,35 @@ form textarea {
     margin: 1.5%;
 }
 
+input, textarea {
+    border-radius: 10px;
+    border: 0;
+    box-shadow:0 0 15px 1px rgba(87, 87, 87, 0.06);
+    padding: 1.2em;
+    font-family:inherit;
+    font-size: inherit;
+}
+
+input:focus {
+    border: none;
+
+}
+
+
+
 .btn-row {
     display: flex;
     align-items: center;
 }
 
 .sign-up-prompt{
-
     padding: 0;
     text-align: center;
     margin: 0 auto;
     font-size: 15px;
     color: black;
 }
+
 .sign-up-prompt .signup{
     color: #1982FC;;
 }

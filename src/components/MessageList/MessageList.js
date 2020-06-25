@@ -143,7 +143,7 @@ export default class MessageList extends Component {
             <div className="scheduled">
                 <h1 className="label">Scheduled messages</h1>
                     <div className="scheduled-content-container">
-                        {(messages.length) ? messages: "No messages scheduled"}
+                        {(messages.length) ? messages: <p className="indicator-empty">No messages scheduled</p>}
                     </div>
             </div>
         )
