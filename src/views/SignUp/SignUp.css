@@ -21,9 +21,34 @@ form textarea {
 }
 
 .login-container form > * {
-    margin: 1.5%;
+    margin: 0 0 2.5% 0;
 }
 
 .login-container #description {
     height: 100px;
+}
+
+.profile-img-wrapper--blank{
+    position: relative;
+    width: 100%;
+    min-width: 125px;
+    max-width: 130px;
+    margin: 0 auto;
+    
+}
+.profile-img-wrapper--blank:after {
+    content: '';
+    display: block;
+    padding: 0 0 100% 0;
+}
+
+.profile-img-wrapper--blank img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    margin: 0;
+    border: 2px solid grey;
 }

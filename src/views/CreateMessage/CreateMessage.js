@@ -9,25 +9,33 @@ import "./CreateMessage.css"
 
 export default class CreateMessage extends Component {
     state = {
-        activeUser: this.props.location.state.activeUser
+        activeUser: this.props.active
     }
     render () {   
-        return (
-            <LoginContext.Consumer> 
-                {active => (
-                    <>
-                    <header>
-                        <DashNavBar user={this.state.activeUser}/>
-                    </header>
-                    <main className="dashboard">
-                        <MessageForm 
-                            newMessage={true}
-                            activeUser={this.state.activeUser}/>  
-                    </main>
-                    </>
-                )}  
-            </LoginContext.Consumer>
+        return (   
+            <>
+                <MessageForm 
+                    newMessage={true}
+                    activeUser={this.state.activeUser}
+                    demo={this.props.demo} 
+                />  
         
+            </>
         )
     }
 }
+
+/*
+
+<LoginContext.Consumer> 
+                {active => (
+                    <>
+                
+                        <MessageForm 
+                            newMessage={true}
+                            activeUser={this.state.activeUser}/>  
+             
+                    </>
+                )}  
+            </LoginContext.Consumer>
+            */

@@ -53,12 +53,13 @@ export default class Login extends Component {
             <>
                 <header>
                     <NavBar/>
-                    <Banner heading="Curator Sign-in" subheading="Keep Up The Momentum"/>
+                    <Banner heading="Leaders 🔥" subheading="Keep Up The Momentum"/>
                 </header>
                 <main className="LandingPage">
                 <div className="login-container">
                     <form id="login" onSubmit={this.handleSubmit}>
                         <h1>Sign-in</h1>
+                        <div className="error-msg"><p>{this.state.error}</p></div>
                         <label htmlFor="username">Username</label>
                         <input type="text" id="username" name="username"/>
                         <label htmlFor="password">Password</label>

@@ -64,7 +64,6 @@ export default class MessageList extends Component {
     }
     
     render(){
-        console.log(this.props.activeUser)
         let dates = []
         let messageGroup = {}
         const getDates = () => {
@@ -97,10 +96,12 @@ export default class MessageList extends Component {
                 let date2 = new Date(b.scheduled)
                 return date1.getTime() - date2.getTime();
             });
-           console.log(date)
 
             const pendingMessages = date[1].map((message, i)=> {
                 // Indicate not queued if time has passed
+                const editMessagePath = (this.props.demo)? 
+                `demo/edit-message/${message.id}`
+                : `dashboard/edit-message/${message.id}`;
                 const notQueued =(moment(message.scheduled).utc() > moment().utc()) 
                 ? "message-preview-container"
                 : "message-preview-container sent"
@@ -108,12 +109,13 @@ export default class MessageList extends Component {
                     <React.Fragment key={i}>
                     <Link to={
                         {   
-                            pathname: `/edit-message/${message.id}`,
+                            pathname: editMessagePath,
                             state: {
                                 content: message.content,
                                 scheduled: message.scheduled,
                                 messageId: message.id,
-                                activeUser: this.props.activeUser
+                                activeUser: this.props.activeUser,
+                                demo: this.props.demo
                         }
                     }}>
                             <li> 
@@ -141,7 +143,7 @@ export default class MessageList extends Component {
             <div className="scheduled">
                 <h1 className="label">Scheduled messages</h1>
                     <div className="scheduled-content-container">
-                        {messages}
+                        {(messages.length) ? messages: "No messages scheduled"}
                     </div>
             </div>
         )

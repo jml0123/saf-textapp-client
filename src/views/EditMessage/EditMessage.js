@@ -12,28 +12,18 @@ export default class EditMessage extends Component{
         scheduled: this.props.location.state.scheduled,
         id: this.props.location.state.messageId,
         activeUser:  this.props.location.state.activeUser,
+        demo: this.props.location.state.demo,
     }
 
     render(){
-    console.log(this.state)
     return (
-        <LoginContext.Consumer> 
-            {active => (
-                <>
-                <header>
-                    <DashNavBar user = {this.state.activeUser}/>
-                </header>
-                <main className="dashboard">
-                    <MessageForm 
-                        content = {this.state.content} 
-                        scheduled = {this.state.scheduled} 
-                        id={this.state.id}
-                        activeUser = {this.state.activeUser}
-                        />  
-                </main>
-                </>
-            )}
-        </LoginContext.Consumer> 
-    )
+        <MessageForm 
+            content = {this.state.content} 
+            scheduled = {this.state.scheduled} 
+            id={this.state.id}
+            activeUser = {this.state.activeUser}
+            demo={this.state.demo}
+            />       
+        )
     }
 }

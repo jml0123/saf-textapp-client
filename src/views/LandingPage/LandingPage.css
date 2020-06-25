@@ -6,7 +6,10 @@
     width: 95%;
     margin: 0 auto;
     font-weight: bold;
+}
 
+.section-heading h1 {
+    margin: 0 auto;
 }
 
 @media (min-width: 768px)  {
