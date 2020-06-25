@@ -30,7 +30,7 @@ export default class DemoAdmin extends Component {
     }
 
   async componentDidMount() {
-    TokenService.saveAuthToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsImlhdCI6MTU5MzA0OTMwNiwic3ViIjoiTXlsb19NZXNzYWdlX0JvdCJ9.PCVI4KLkmzTh7EU6hK7JsTMpstLBjMOIGu4ZvAfn4II')
+    TokenService.saveAuthToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXJhdG9yX2lkIjoxLCJpYXQiOjE1OTMwNjQ4OTIsInN1YiI6Ik15bG9fTWVzc2FnZV9Cb3QifQ.CdcNXvk2rkvl83g3bkvYsuJH9UOcvrtufmL_siCKkP0')
     await this.getUserData().then(user=> {
         this.setState({
             ...this.state,
