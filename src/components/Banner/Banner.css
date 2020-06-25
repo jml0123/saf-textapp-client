@@ -24,9 +24,28 @@
 }
 .banner-content {
     text-align: center;
+    padding: 5%;
 }
 
 .banner-content h1, h2{
     color: white;
+}
+
+
+
+
+@media (min-width: 1250px)  {
+    .banner-content {
+        padding: 2%;
+        font-size: 18px;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1249px) {
+    .banner-content {
+        padding: 2%;
+        font-size: 18px
+    }
 }
 

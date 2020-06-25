@@ -247,6 +247,7 @@ export default class DemoAdmin extends Component {
                   It's that simple! You can send information, links to important resources, or a motivational note.
                </p>
                </div>
+               <div className="demo-card">
                 <ProfileCard
                     name={this.state.active.full_name}
                     description ={this.state.active.profile_description}
@@ -255,6 +256,7 @@ export default class DemoAdmin extends Component {
                     demo={true}
                     callback={this.setDemoSubId}
                 />
+                </div>
                   <p className="demo-caption">This is your profile card. Your profile card is how the public sees you. 
                   Subscribe to yourself to try it out.<br/>Note: Your phone number will be deleted after this demo ends.</p>
               </div>
@@ -282,7 +284,7 @@ export default class DemoAdmin extends Component {
         {demo}
         <header>
             <p onClick={() => this.showDemoModal()} className="header-comment">Welcome to Start a <span role="img" aria-label="Fire">🔥</span> Demo!</p>
-            <DashNavBar user={this.state.active}/>
+            <DashNavBar user={this.state.active} toggleEditView={() => {}}/>
         </header>
         <main className="Dashboard">
         <LoginContext.Provider value = {LoginContextVal}>

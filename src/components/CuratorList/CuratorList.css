@@ -7,8 +7,9 @@
     min-height: 100vh;
 }
 
-@media (min-width: 768px)  {
+@media (min-width: 1250px)  {
     .curator-wrapper {
         width: 66vw;
+        max-width: 1250px;
     }
 }

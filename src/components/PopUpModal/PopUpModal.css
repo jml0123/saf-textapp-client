@@ -5,7 +5,6 @@
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,9 +12,10 @@
 }
 
 .bg-dark-blur {
-    position: absolute;
+    position: fixed;
     width: 100vw;
-    height: 100vh;
+    bottom: auto;
+    min-height: 100vh;
     background: black;
     opacity: 0.6;
     padding: 0;
@@ -51,11 +51,23 @@
 
 }
 
-@media (min-width: 400px)  {
+
+@media(min-width: 1251px) {
+    .pop-up-wrapper{
+        top: 0;
+        bottom: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1250px) {
     .pop-up-container {
         padding: 1em;
-        width: 66vw;
+        width: 75vw;
         border-radius: 20px;
         border: 2px solid grey;
+    }
+    .pop-up-wrapper{
+        top: 0;
+        bottom: 0;
     }
  }
