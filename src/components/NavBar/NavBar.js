@@ -13,6 +13,7 @@ export default function NavBar(props) {
                 <div className="nav-wrapper">
                 <ul>
                     <li><Link to="/login">Activate Your Base</Link></li>
+                    <li><Link to="/demo">Try a Demo</Link></li>
                 </ul>
                 </div>
             </div>

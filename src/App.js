@@ -17,6 +17,7 @@ import ProfileView from './views/ProfileView/ProfileView';
 
 import PrivateRoute from './utils/PrivateRoute'
 import PublicOnlyRoute from './utils/PublicOnlyRoute'
+import DemoAdmin from './components/Admin/DemoAdmin';
 
 class App extends Component {
 
@@ -90,8 +91,11 @@ class App extends Component {
             path='/dashboard'
             component={Admin}
           />
+          <Route
+            path='/demo'
+            component={DemoAdmin}
+          />
 
-    
           
       </>
     );

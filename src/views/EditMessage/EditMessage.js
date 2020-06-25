@@ -12,6 +12,7 @@ export default class EditMessage extends Component{
         scheduled: this.props.location.state.scheduled,
         id: this.props.location.state.messageId,
         activeUser:  this.props.location.state.activeUser,
+        demo: this.props.location.state.demo,
     }
 
     render(){
@@ -21,6 +22,7 @@ export default class EditMessage extends Component{
             scheduled = {this.state.scheduled} 
             id={this.state.id}
             activeUser = {this.state.activeUser}
+            demo={this.state.demo}
             />       
         )
     }

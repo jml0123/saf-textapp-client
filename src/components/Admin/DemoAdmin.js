@@ -4,39 +4,52 @@ import config from '../../config';
 import moment from 'moment';
 import TokenService from '../../services/token-service'
 import PrivateRoute from '../../utils/PrivateRoute'
-
 import DashNavBar from "../../components/NavBarDash/NavBarDash";
 import EditUserForm from "../../components/EditUserForm/EditUserForm";
-
 import CreateMessage from "../../views/CreateMessage/CreateMessage"
 import Dashboard from "../../views/Dashboard/Dashboard"
 import EditMessage from "../../views/EditMessage/EditMessage"
-
 import MessagesContext from "../../MessagesContext"
 import LoginContext from "../../LoginContext"
-
+import ProfileCard from '../ProfileCard/ProfileCard';
+import PopUpModal from '../PopUpModal/PopUpModal';
 
 import "./Admin.css"
 
-export default class Admin extends Component {
+
+export default class DemoAdmin extends Component {
     state = {
         messages: [],
         queuedMessages: [],
         active: [],
         editUserToggle: false,
         error: null,
-        loaded: false
+        loaded: false,
+        demo: false,
     }
 
   async componentDidMount() {
-    await this.getUserData();
+    TokenService.saveAuthToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsImlhdCI6MTU5MzA0OTMwNiwic3ViIjoiTXlsb19NZXNzYWdlX0JvdCJ9.PCVI4KLkmzTh7EU6hK7JsTMpstLBjMOIGu4ZvAfn4II')
+    await this.getUserData().then(user=> {
+        this.setState({
+            ...this.state,
+            loaded: true
+        })
+    });
     await this.getMessages(this.state.active.id);
-    this.setState({
-        ...this.state,
-        loaded: true
-    })
+    this.runDemo()
   }
 
+  componentWillUnmount() {
+      TokenService.clearAuthToken()
+  }
+
+  runDemo = async () => {
+    this.setState({
+        ...this.state,
+        demo: true
+    })
+  }
     getUserData = async () => {
       fetch(`${config.API_ENDPOINT}/users`, {
         method: 'GET',
@@ -139,15 +152,37 @@ export default class Admin extends Component {
       })
     }
 
+    showDemoModal = () => {
+      this.setState({
+        ...this.state,
+        demo: !this.state.demo
+      })
+    }
+
     handleDeleteUser = () => {
       this.props.history.push('/')
     }
+
     editUser = () => {
       this.props.history.push('/dashboard')
     }
     
-    
+  
     render(){
+        console.log(this.state.loaded)
+        console.log(this.state.active.id)
+        
+        const demo = (!this.state.active.id)? null
+        :  <PopUpModal onClose={this.showDemoModal} show={this.state.demo}>
+                <p>Welcome to SAF DEMO, first create and schedule a message, put your phone number in, and you will recieve it</p>
+                <ProfileCard
+                    name={this.state.active.full_name}
+                    description ={this.state.active.profile_description}
+                    profileImg = {this.state.active.profile_img_link}
+                    curator_id = {this.state.active.id}
+                    demo={true}
+                />
+            </PopUpModal>
 
         const MessagesContextVal = {
             messages: this.state.messages,
@@ -161,49 +196,40 @@ export default class Admin extends Component {
             editUser: this.editUser,
             deleteUser: this.handleDeleteUser
         }
- 
-        const editUserView = (this.state.editUserToggle)?  
-          <EditUserForm 
-            user = {this.state.active}
-            onDeleteUser = {this.handleDeleteUser}
-            toggleEditView = {this.toggleEditView}
-          />
-          : ""
 
 
     if (!this.state.loaded) {
         return <div/> 
     }
-
     return (
       <>
+        {demo}
         <header>
-            <DashNavBar user={this.state.active} toggleEditView={this.toggleEditView}/>
+            <p onClick={() => this.showDemoModal()} className="header-comment">Welcome to Start a <span role="img" aria-label="Fire">🔥</span> Demo!</p>
+            <DashNavBar user={this.state.active}/>
         </header>
         <main className="Dashboard">
-            {editUserView}
         <LoginContext.Provider value = {LoginContextVal}>
         <MessagesContext.Provider value = {MessagesContextVal}>
            <PrivateRoute
-              exact path='/dashboard'
-              component={() => <Dashboard active={this.state.active}/>
+              exact path='/demo'
+              component={() => <Dashboard active={this.state.active} demo={true}/>
             }
             />
         <Switch>
            <PrivateRoute
-            exact path='/dashboard/edit-message/:id'
+            exact path='/demo/edit-message/:id'
             component={EditMessage}
           />
           <PrivateRoute
-            exact path='/dashboard/create-message'
-            component={() => <CreateMessage active={this.state.active}/>}
+            exact path='/demo/create-message'
+            component={() => <CreateMessage active={this.state.active} demo={true}/>}
           />
           </Switch>
         </MessagesContext.Provider>
         </LoginContext.Provider>
         </main>
+     
       </>
     );
   }}
-
-

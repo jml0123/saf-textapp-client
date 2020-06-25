@@ -6,18 +6,34 @@ export default class ProfileCard extends Component {
 
     state = {
         error: null,
-        subscriberCount: null
+        subscriberCount: null,
+        displayedSubs: null,
     }
 
     validatePhoneNumber(number){
         const US_PHONE_PATTERN = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
         return US_PHONE_PATTERN.test(number);
     }
-    componentDidMount() {
-        this.getNumberOfSubs(this.props.curator_id)
+    async componentDidMount() {
+        await this.getNumberOfSubs(this.props.curator_id)
+        await this.setRandomSubs()
     }
 
-    getNumberOfSubs = curator_id => {
+    setRandomSubs = async () =>{
+        const subscriberCountRand = 
+        
+        (!this.state.subscriberCount || parseInt(this.state.subscriberCount) === 0) ? 
+        20 + Math.floor(Math.random() * 100) 
+        
+        : this.state.subscriberCount;
+
+        this.setState({
+            ...this.state,
+            displayedSubs: subscriberCountRand
+        })
+    }
+
+    getNumberOfSubs = async curator_id => {
         fetch(`${config.API_ENDPOINT}/subscribers/curator/${curator_id}`, {
             method: 'GET',
             headers: {
@@ -34,7 +50,6 @@ export default class ProfileCard extends Component {
             .then(count => {
                 const countToInt = count[0].count
                 this.setNumberOfSubs(countToInt)
-                console.log(countToInt)
             })
             .catch(error => this.setState({ error }))
     }
@@ -77,18 +92,20 @@ export default class ProfileCard extends Component {
             return res.json()
         })
         .then(data => {
-            console.log(data)
-            this.setState({result: `Successfully Subscribed to ${this.props.name}`})
+            this.setState({
+                ...this.state,
+                result: `Successfully Subscribed to ${this.props.name}`,
+                subscriberCount: parseInt(this.state.subscriberCount) + 1
+            })
         })
         .catch(error =>
             this.setState({error}))
     };
     
     render(){
-        const subscriberCount = (!this.state.subscriberCount || this.state.subscriberCount == 0) ? 
-        20 + Math.floor(Math.random() * 100) 
-        : this.state.subscriberCount;
         
+        const subscribers = (parseInt(this.state.subscriberCount) !== 0 || this.props.demo) ? this.state.subscriberCount : this.state.displayedSubs
+
         const userImg = (this.props.profileImg === null)? 
             "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
             : this.props.profileImg
@@ -101,7 +118,9 @@ export default class ProfileCard extends Component {
                 <div className="curator-profile">
                     <div className="curator-profile-heading">
                         <h1>{this.props.name}</h1>
-                        <h1 className="subs-count">{subscriberCount} <span role="img" aria-label="Fire">🔥</span></h1>
+                        <h1 className="subs-count">
+                            {subscribers} 
+                            <span role="img" aria-label="Fire">🔥</span></h1>
                     </div>
                     <p>{this.props.description}</p>
                 </div>

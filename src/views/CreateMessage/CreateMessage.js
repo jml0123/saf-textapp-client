@@ -16,7 +16,9 @@ export default class CreateMessage extends Component {
             <>
                 <MessageForm 
                     newMessage={true}
-                    activeUser={this.state.activeUser}/>  
+                    activeUser={this.state.activeUser}
+                    demo={this.props.demo} 
+                />  
         
             </>
         )

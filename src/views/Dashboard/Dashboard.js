@@ -14,21 +14,25 @@ import LoginContext from "../../LoginContext"
 
 import "./Dashboard.css"
 
-// Should dashboard be its own router?
 
 export default class Dashboard extends Component {
+
     static contextType = MessagesContext;
 
     render(){
-        const renderMessageList = (this.props.messageList !== [])?  <MessageList activeUser ={this.props.active}/> : null
+
+        const newMessage = (this.props.demo) ? "demo/create-message" 
+        : "dashboard/create-message"
+      
         return (
             <>
                 <div className="dashboard-container">
-                    {renderMessageList}
+                <MessageList activeUser ={this.props.active} 
+                demo={(this.props.demo)? true : false}/> 
                 </div>
                 <div className="scheduler-console">
                     <div className="console-btn-wrapper">
-                        <Link to ="dashboard/create-message">,
+                        <Link to ={newMessage}>
                             <button type="button">
                                 New Message
                             </button>

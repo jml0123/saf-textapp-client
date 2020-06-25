@@ -16,7 +16,7 @@ class MessageForm extends Component {
             scheduled: this.props.scheduled || "",
             id: this.props.id || "",
         },
-        error: null
+        error: null,
     }
 
     invalidNoContent() {
@@ -106,7 +106,7 @@ class MessageForm extends Component {
             this.setState({error: null});
             // Make request here
             this.context.addMessage(message);
-            this.props.history.push('/dashboard');
+            this.props.history.push((this.props.demo)? '/demo':'/dashboard');
         })
         .catch(err => {
             console.error(err)
@@ -138,23 +138,26 @@ class MessageForm extends Component {
                     throw error
                 })
             }
+            return res.json()
         })
         .then(editedMessage => {
+            console.log(editedMessage)
             this.context.editMessage(editedMessage, this.props.id)
-            this.props.history.push('/dashboard');
+            this.props.history.push((this.props.demo)? '/demo':'/dashboard');
         })
         .catch(err => {
             console.error(err)
         })
+   
     }
 
     handleClickCancel = () => {
-        this.props.history.push('/dashboard')
+        this.props.history.push((this.props.demo)? '/demo':'/dashboard');
     }
 
     handleDeleteMessage(messageId) {
         if(this.props.newMessage){
-            this.props.history.push('/dashboard');
+            this.props.history.push((this.props.demo)? '/demo':'/dashboard');
             return
         }
         fetch(`${config.API_ENDPOINT}/messages/${messageId}`, {
@@ -175,7 +178,7 @@ class MessageForm extends Component {
         .then(() => {
             // No data is passed on delete
             this.context.deleteMessage(messageId);
-            this.props.history.push('/dashboard');
+            this.props.history.push((this.props.demo)? '/demo':'/dashboard');
         })
         .catch(err => {
             console.error(err)
@@ -183,7 +186,6 @@ class MessageForm extends Component {
     }
 
     render(){
-        console.log(this.state)
         const now = moment(new Date()).format('YYYY-MM-DDTHH:mm')
         const messageFormBtns = (this.props.newMessage)? 
              <> 

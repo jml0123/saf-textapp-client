@@ -1,0 +1,38 @@
+
+.dashboard-container {
+    padding: 5% 2% 0 2%;
+    margin: 0;
+}
+
+.console-btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 0 5%;
+    margin-bottom: 5%;
+}
+
+.header-comment {
+    padding: 0;
+    margin: 0;
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+@media (min-width: 768px)  {
+    .scheduled {
+        max-width: 66%;
+    }
+ }
+
+button {
+    background: white;
+    border: 2px solid lightgray;
+    min-width: 100px;
+    min-height: 25px;
+    max-width: 130px;
+    border-radius: 2px;
+    padding: 10px;
+}
