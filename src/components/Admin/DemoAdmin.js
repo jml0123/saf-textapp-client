@@ -26,6 +26,7 @@ export default class DemoAdmin extends Component {
         error: null,
         loaded: false,
         demo: false,
+        subscriptionId: null,
     }
 
   async componentDidMount() {
@@ -41,7 +42,12 @@ export default class DemoAdmin extends Component {
   }
 
   componentWillUnmount() {
-      TokenService.clearAuthToken()
+      Promise.all([
+          this.deleteAllDemoMessages(), 
+          this.deleteSubscription()])
+        .then(()=>{
+            TokenService.clearAuthToken()
+      })
   }
 
   runDemo = async () => {
@@ -50,6 +56,61 @@ export default class DemoAdmin extends Component {
         demo: true
     })
   }
+
+  deleteSubscription = () =>{
+    if (!this.state.subscriptionId) {
+        return
+    }
+    fetch(`${config.API_ENDPOINT}/subscribers/${this.state.subscriptionId}`, {
+        method: 'DELETE', 
+        headers: {
+            'content-type': 'application/json',  
+        }
+    }).then(res => {
+        if(!res.ok) {
+            return res.json().then(error => {
+                throw error
+            })
+        }
+        console.log("Successfully deleted")
+        return res
+    })
+    .catch(err => console.log(err))
+  }
+
+  deleteAllDemoMessages = async () => {
+      this.state.messages.map(async message => {
+          await this.deleteDemoMessage(message.id)
+      })
+      return 
+  }
+  
+  deleteDemoMessage = async messageId => {
+    console.log("deleting")
+    fetch(`${config.API_ENDPOINT}/messages/${messageId}`, {
+        method: 'DELETE', 
+        headers: {
+            'content-type': 'application/json',
+            'authorization': `bearer ${TokenService.getAuthToken()}`
+        }
+    })
+    .then(res => {
+        if(!res.ok) {
+            return res.json().then(error => {
+                throw error
+            })
+        }
+        return res
+    })
+    .then(res => {
+        console.log("deleted")
+        return 
+    })
+    .catch(err => {
+        console.error(err)
+    })      
+  }
+
     getUserData = async () => {
       fetch(`${config.API_ENDPOINT}/users`, {
         method: 'GET',
@@ -77,6 +138,15 @@ export default class DemoAdmin extends Component {
         ...this.state,
         active
       })
+    }
+
+    setDemoSubId = subscriber => {
+        this.setState({
+            ...this.state,
+            subscriptionId: subscriber.id
+        })
+
+        console.log(this.state)
     }
 
     getMessages = async curator_id => {
@@ -169,9 +239,7 @@ export default class DemoAdmin extends Component {
     
   
     render(){
-        console.log(this.state.loaded)
-        console.log(this.state.active.id)
-        
+       
         const demo = (!this.state.active.id)? null
         :  <PopUpModal onClose={this.showDemoModal} show={this.state.demo}>
                 <p>Welcome to SAF DEMO, first create and schedule a message, put your phone number in, and you will recieve it</p>
@@ -181,6 +249,7 @@ export default class DemoAdmin extends Component {
                     profileImg = {this.state.active.profile_img_link}
                     curator_id = {this.state.active.id}
                     demo={true}
+                    callback={this.setDemoSubId}
                 />
             </PopUpModal>
 

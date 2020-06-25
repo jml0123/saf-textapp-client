@@ -97,6 +97,9 @@ export default class ProfileCard extends Component {
                 result: `Successfully Subscribed to ${this.props.name}`,
                 subscriberCount: parseInt(this.state.subscriberCount) + 1
             })
+            if (this.props.callback){
+                this.props.callback(data)
+            }
         })
         .catch(error =>
             this.setState({error}))

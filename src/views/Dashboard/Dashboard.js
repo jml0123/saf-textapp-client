@@ -26,7 +26,7 @@ export default class Dashboard extends Component {
       
         return (
             <>
-                <div className="dashboard-container">
+                <div className="messages-container">
                 <MessageList activeUser ={this.props.active} 
                 demo={(this.props.demo)? true : false}/> 
                 </div>
