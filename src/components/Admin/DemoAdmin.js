@@ -43,6 +43,7 @@ export default class DemoAdmin extends Component {
 
   componentWillUnmount() {
       Promise.all([
+          console.log("Purging"),
           this.deleteAllDemoMessages(), 
           this.deleteSubscription()])
         .then(()=>{
@@ -57,10 +58,11 @@ export default class DemoAdmin extends Component {
     })
   }
 
-  deleteSubscription = () =>{
+  deleteSubscription = () => {
     if (!this.state.subscriptionId) {
-        return
+      return
     }
+    console.log(this.state.subscriptionId)
     fetch(`${config.API_ENDPOINT}/subscribers/${this.state.subscriptionId}`, {
         method: 'DELETE', 
         headers: {
@@ -136,10 +138,12 @@ export default class DemoAdmin extends Component {
     }
 
     setDemoSubId = subscriber => {
+        console.log(subscriber)
         this.setState({
             ...this.state,
             subscriptionId: subscriber.id
         })
+     
     }
 
     getMessages = async curator_id => {
@@ -235,7 +239,14 @@ export default class DemoAdmin extends Component {
        
         const demo = (!this.state.active.id)? null
         :  <PopUpModal onClose={this.showDemoModal} show={this.state.demo}>
-                <p>Welcome to SAF DEMO, first create and schedule a message, put your phone number in, and you will recieve it</p>
+              <div className="demo-popup">
+                <div className="welcome-section">
+                <p className="welcome-text">Welcome to Start a Fire <span role="img" aria-label="Fire">🔥</span>!</p>
+                <p className="demo-explainer">First, subscribe to Mylo the Message Bot in order to recieve text messages. 
+                  Then, create a message, and schedule for it to be sent in the next minute or so to all of your subscribers. 
+                  It's that simple! You can send information, links to important resources, or a motivational note.
+               </p>
+               </div>
                 <ProfileCard
                     name={this.state.active.full_name}
                     description ={this.state.active.profile_description}
@@ -244,6 +255,9 @@ export default class DemoAdmin extends Component {
                     demo={true}
                     callback={this.setDemoSubId}
                 />
+                  <p className="demo-caption">This is your profile card. Your profile card is how the public sees you. 
+                  Subscribe to yourself to try it out.<br/>Note: Your phone number will be deleted after this demo ends.</p>
+              </div>
             </PopUpModal>
 
         const MessagesContextVal = {
@@ -287,7 +301,7 @@ export default class DemoAdmin extends Component {
             exact path='/demo/create-message'
             component={() => <CreateMessage active={this.state.active} demo={true}/>}
           />
-          </Switch>
+        </Switch>
         </MessagesContext.Provider>
         </LoginContext.Provider>
         </main>

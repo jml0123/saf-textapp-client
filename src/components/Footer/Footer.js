@@ -11,7 +11,7 @@ export default function Footer(props) {
                 <a href="https://github.com/jml0123" target="_blank">
                     <div className="content-row">
                         <p>made with caffeine</p>
-                        <img src="https://cdn.iconscout.com/icon/free/png-512/github-153-675523.png" className = "icon" />
+                        <img src="https://cdn.iconscout.com/icon/free/png-512/github-153-675523.png" alt="github logo" className = "icon" />
                     </div>
                 </a>
             </div>
@@ -21,6 +21,3 @@ export default function Footer(props) {
         </footer>
     )
 }
-
-
-/* Add unsub form here */

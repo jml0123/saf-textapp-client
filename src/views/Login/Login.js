@@ -53,7 +53,7 @@ export default class Login extends Component {
             <>
                 <header>
                     <NavBar/>
-                    <Banner heading="Leaders 🔥" subheading="Keep Up The Momentum"/>
+                    <Banner heading="🔥" subheading="Keep Up The Momentum" small={true}/>
                 </header>
                 <main className="LandingPage">
                 <div className="login-container">

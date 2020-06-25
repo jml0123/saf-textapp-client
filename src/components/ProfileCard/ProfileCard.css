@@ -64,14 +64,15 @@
 .curator-profile p {
     display: inline-block;
     min-width: 100%;
+    text-align: left;
 }
 
 .curator-profile-heading {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     justify-content: space-between;
     max-width: 100%; 
-    padding-right: 10%;
+    padding: 0;
 }
 
 .curator-profile h1 {
@@ -83,7 +84,7 @@
 .phone-num-container {
     display: block;
     width: 100%;
-    padding-right: 10%;
+
 }
 
 .phone-num-container form {
@@ -94,10 +95,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
- 
+
 }
-
-
 .phone-num-input {
     display: flex;
     flex-direction: row;
@@ -118,14 +117,19 @@
 }
 
 
-button {
+.phone-commit-btn {
     background: white;
-    border: 2px solid lightgray;
-    min-width: 100px;
+    min-width: 75px;
     min-height: 25px;
     max-width: 130px;
     border-radius: 2px;
     padding: 10px;
+    transition: 60ms ease;
+}
+
+.phone-commit-btn:hover {
+    background: #F8730A;
+    color: white;
 }
 
 form input {
@@ -147,10 +151,17 @@ form textarea {
         text-align: left;
     }
 
-    .subscribe-container form {
+    .phone-num-container form {
         justify-content: space-between; 
         align-self: start;
         margin: 0;
-        width: 100%;
+
+    }
+    .curator-profile-heading {
+        flex-direction: row;
+        padding-right: 10%;
+    }
+    .phone-num-container {
+        padding-right: 10%;
     }
 }
