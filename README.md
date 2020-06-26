@@ -24,5 +24,5 @@ Messages are recieved by subscribers according to the scheduled time
 - React.js
 - (Twillio API)
 
-This is the client repo. Here's a 
-[link](https://saf-textapp-client.jml0123.vercel.app/) to the API repo.
+Here's a 
+[link](https://github.com/jml0123/saf-api) to the SAF API repo.
