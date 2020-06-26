@@ -118,7 +118,6 @@ export default class EditUserForm extends Component {
       })
       .then((user) => {
         this.setState({ error: null });
-        // Make request here
         this.context.editUser(user);
       })
       .catch((err) => {

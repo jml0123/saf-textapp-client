@@ -56,7 +56,6 @@ export default class SignUp extends Component {
       });
   };
 
-  // Copy this to a service file (this exists in login too)
   handleRegistrationSuccess = (path) => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || `/${path}`;

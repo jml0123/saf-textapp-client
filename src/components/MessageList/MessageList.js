@@ -9,7 +9,7 @@ import "./MessageList.css";
 export default class MessageList extends Component {
   static contextType = MessagesContext;
 
-  // Add Date functions to one file
+  // Consider adding date functions to one file
   isToday = (date) => {
     let d = moment(date);
     d = moment(d, "YYYY-MM-DDTHH:mm:ssZ");

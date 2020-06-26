@@ -76,13 +76,3 @@ class App extends Component {
 }
 
 export default App;
-
-// integrate router
-// add index.js to all components
-
-/*
-
-
-
-
-*/

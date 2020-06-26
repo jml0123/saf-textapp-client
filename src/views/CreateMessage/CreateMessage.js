@@ -19,18 +19,3 @@ export default class CreateMessage extends Component {
     );
   }
 }
-
-/*
-
-<LoginContext.Consumer> 
-                {active => (
-                    <>
-                
-                        <MessageForm 
-                            newMessage={true}
-                            activeUser={this.state.activeUser}/>  
-             
-                    </>
-                )}  
-            </LoginContext.Consumer>
-            */

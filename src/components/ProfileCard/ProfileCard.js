@@ -51,7 +51,7 @@ export default class ProfileCard extends Component {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        //No Auth required
+        // No Auth required
       },
     })
       .then((res) => {
@@ -92,7 +92,7 @@ export default class ProfileCard extends Component {
       body: JSON.stringify(subscriber),
       headers: {
         "content-type": "application/json",
-        // no authorization required
+        // No Auth required
       },
     })
       .then((res) => {

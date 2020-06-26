@@ -23,13 +23,3 @@ describe("EditMessage View", () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 });
-
-/*
-
-  content: this.props.location.state.content,
-        scheduled: this.props.location.state.scheduled,
-        id: this.props.location.state.messageId,
-        activeUser:  this.props.location.state.activeUser,
-        demo: this.props.location.state.demo,
-
-*/
