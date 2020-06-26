@@ -148,19 +148,19 @@ export default class ProfileCard extends Component {
           <div className="phone-num-container">
             <form onSubmit={this.handleAddSubscriber}>
               <div className="phone-num-input">
-                <label htmlFor="country-code"></label>
                 <input
                   type="text"
                   value="+1"
                   className="country-code"
                   id="country-code"
+                  aria-label="country-code"
                   readOnly
                 />
-                <label htmlFor="phone-number"></label>
                 <input
                   type="text"
                   id="phone-number"
                   placeholder="XXX-XXX-XXXX"
+                  aria-label="phone-number"
                   ref={(input) => (this.phone_number = input)}
                   name="phone_number"
                 />
