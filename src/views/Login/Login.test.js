@@ -1,18 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Login from './Login';
-import {BrowserRouter as Router} from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import Login from "./Login";
+import { BrowserRouter as Router } from "react-router-dom";
 
-describe('Login Page', () => {
-    it('renders without crashing', () => {
-        const div = document.createElement('div');
-        ReactDOM.render(
-            <Router>
-                <Login />
-            </Router>, 
-            div
-        );
-        ReactDOM.unmountComponentAtNode(div);
-      });
-})
-
+describe("Login Page", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
+    ReactDOM.render(
+      <Router>
+        <Login />
+      </Router>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});

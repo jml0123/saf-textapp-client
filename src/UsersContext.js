@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const UsersContext = React.createContext({
-    users: [],
-    updateUserList:() =>{ }
-})
+  users: [],
+  updateUserList: () => {},
+});
 
 export default UsersContext;

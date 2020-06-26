@@ -1,113 +1,102 @@
-
 .dashboard-container {
-    padding: 5% 2% 0 2%;
-    margin: 0;
+  padding: 5% 2% 0 2%;
+  margin: 0;
 }
 
 .console-btn-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
-    padding: 0 5%;
-    margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 0 5%;
+  margin-bottom: 5%;
 }
 
 .header-comment {
-    padding: 0;
-    margin: 0;
-    background: black;
-    color: white;
-    text-align: center;
-    cursor: pointer
+  padding: 0;
+  margin: 0;
+  background: black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
 }
 
 .demo-popup {
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .welcome-section {
-    padding: 1.33em 0 0 0;
-    width: 80%;
-    font-size: 17px;
+  padding: 1.33em 0 0 0;
+  width: 80%;
+  font-size: 17px;
 }
 
 .welcome-text {
-    padding: 0;
-    width: 100%;
-    font-weight: bold;
-    text-align: center;
-    margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
 }
-
 
 .demo-explainer {
-    padding: 0;
-    width: 100%;
+  padding: 0;
+  width: 100%;
 }
 
-
 .demo-caption {
-    padding: 0;
-    margin: 0;
-    padding: 1.33em;
+  padding: 0;
+  margin: 0;
+  padding: 1.33em;
 }
 
 .demo-card {
-    padding: 3%;
-  
+  padding: 3%;
 }
-
 
 button {
-    background: white;
-    border: 2px solid lightgray;
-    min-width: 100px;
-    min-height: 25px;
-    max-width: 130px;
-    border-radius: 2px;
-    padding: 10px;
+  background: white;
+  border: 2px solid lightgray;
+  min-width: 100px;
+  min-height: 25px;
+  max-width: 130px;
+  border-radius: 2px;
+  padding: 10px;
 }
 
-@media (min-width: 1000px)  {
-    .scheduled {
-        max-width: 66%;
-    }
-    .demo-caption {
-        padding: 1em;
-        text-align: center;
-    }
-    .demo-card{
-        padding: 0;
-        width: 80%;
-    }
-    .demo-popup {
-        max-width: 1250px;
-    }
-  
+@media (min-width: 1000px) {
+  .scheduled {
+    max-width: 66%;
+  }
+  .demo-caption {
+    padding: 1em;
+    text-align: center;
+  }
+  .demo-card {
+    padding: 0;
+    width: 80%;
+  }
+  .demo-popup {
+    max-width: 1250px;
+  }
 }
 
-
-
-@media (min-width: 768px) and (max-width: 1250px)  {
-    .scheduled {
-        max-width: 66%;
-    }
-    .demo-caption {
-        padding: 1em;
-        text-align: center;
-    }
-    .demo-card{
-        padding: 0;
-        width: 100%;
-    }
-  
-  
+@media (min-width: 768px) and (max-width: 1250px) {
+  .scheduled {
+    max-width: 66%;
+  }
+  .demo-caption {
+    padding: 1em;
+    text-align: center;
+  }
+  .demo-card {
+    padding: 0;
+    width: 100%;
+  }
 }

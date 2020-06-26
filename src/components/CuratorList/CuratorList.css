@@ -1,15 +1,15 @@
 .curator-wrapper {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    align-items: center;
-    width: 90%;
-    padding-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  width: 90%;
+  padding-bottom: 5%;
 }
 
-@media (min-width: 1250px)  {
-    .curator-wrapper {
-        width: 66vw;
-        max-width: 1250px;
-    }
+@media (min-width: 1250px) {
+  .curator-wrapper {
+    width: 66vw;
+    max-width: 1250px;
+  }
 }

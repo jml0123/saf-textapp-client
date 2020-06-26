@@ -1,62 +1,59 @@
-
 form input {
-    background: rgb(231, 231, 231);
-    height: 30px;
+  background: rgb(231, 231, 231);
+  height: 30px;
 }
 
 form textarea {
-    background: rgb(231, 231, 231);
+  background: rgb(231, 231, 231);
 }
 
 .login-container {
-    margin: 0 auto;
-    width: 70%;
-    padding: 5%;
-    max-width: 500px;
+  margin: 0 auto;
+  width: 70%;
+  padding: 5%;
+  max-width: 500px;
 }
-.login-container form{
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .login-container form > * {
-    margin: 1.5%;
+  margin: 1.5%;
 }
 
-input, textarea {
-    border-radius: 10px;
-    border: 0;
-    box-shadow:0 0 15px 1px rgba(87, 87, 87, 0.06);
-    padding: 1.2em;
-    font-family:inherit;
-    font-size: inherit;
+input,
+textarea {
+  border-radius: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 1px rgba(87, 87, 87, 0.06);
+  padding: 1.2em;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 input:focus {
-    border: none;
-
+  border: none;
 }
-
-
 
 .btn-row {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-.sign-up-prompt{
-    padding: 0;
-    text-align: center;
-    margin: 0 auto;
-    font-size: 15px;
-    color: black;
+.sign-up-prompt {
+  padding: 0;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 15px;
+  color: black;
 }
 
-.sign-up-prompt .signup{
-    color: #1982FC;;
+.sign-up-prompt .signup {
+  color: #1982fc;
 }
 .sign-up-prompt .signup:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

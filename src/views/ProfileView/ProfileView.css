@@ -1,40 +1,37 @@
 .section-heading {
-    font-family: sans-serif;
-    text-align: center;
-    font-size: 25px;
-    padding: 6%;
-    width: 95%;
-    margin: 0 auto;
-    font-weight: bold;
-    line-height: 1.3em;
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 25px;
+  padding: 6%;
+  width: 95%;
+  margin: 0 auto;
+  font-weight: bold;
+  line-height: 1.3em;
 }
 
 .curator-container {
-    text-align: left;
-    border: 2px solid lightgrey;
-    min-height: 250px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    margin: 1.66% 0;
-    position: relative;
+  text-align: left;
+  border: 2px solid lightgrey;
+  min-height: 250px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 1.66% 0;
+  position: relative;
 }
 
-
-
-@media (min-width: 1250px)  {
-    .section-heading {
-        max-width: 1250px;
-        font-size: 28px;
-        padding: 3em 3em 2.25em 3em;
-    }
+@media (min-width: 1250px) {
+  .section-heading {
+    max-width: 1250px;
+    font-size: 28px;
+    padding: 3em 3em 2.25em 3em;
+  }
 }
-
 
 @media (min-width: 768px) and (max-width: 1249px) {
-    .section-heading {
-        width: 75%;
-        font-size: 28px;
-        padding: 2em 3.33% 1.75em 3.33%;
-    }
+  .section-heading {
+    width: 75%;
+    font-size: 28px;
+    padding: 2em 3.33% 1.75em 3.33%;
+  }
 }

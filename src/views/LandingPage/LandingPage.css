@@ -1,32 +1,30 @@
 .section-heading {
-    font-family: sans-serif;
-    text-align: center;
-    font-size: 27px;
-    padding: 6%;
-    width: 95%;
-    margin: 0 auto;
-    font-weight: bold;
-    line-height: 1.3em;
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 27px;
+  padding: 6%;
+  width: 95%;
+  margin: 0 auto;
+  font-weight: bold;
+  line-height: 1.3em;
 }
 
 .section-heading {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
-
-@media (min-width: 1250px)  {
-    .section-heading {
-        max-width: 1000px;
-        font-size: 30px;
-        padding: 3em;
-    }
+@media (min-width: 1250px) {
+  .section-heading {
+    max-width: 1000px;
+    font-size: 30px;
+    padding: 3em;
+  }
 }
-
 
 @media (min-width: 768px) and (max-width: 1249px) {
-    .section-heading {
-        width: 100%;
-        font-size: 28px;
-        padding: 2em 3.33%;
-    }
+  .section-heading {
+    width: 100%;
+    font-size: 28px;
+    padding: 2em 3.33%;
+  }
 }

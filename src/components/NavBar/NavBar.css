@@ -1,72 +1,67 @@
-
 nav {
-    height: 66px;
-    background: #0f0f0f;
-    border: none;
-    box-shadow: 1.5px 1.5px 10px rgba(90, 90, 90, 0.20);
+  height: 66px;
+  background: #0f0f0f;
+  border: none;
+  box-shadow: 1.5px 1.5px 10px rgba(90, 90, 90, 0.2);
 }
 
 .nav-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: none;
-    margin: 0 auto;
-    max-width: 2000px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: none;
+  margin: 0 auto;
+  max-width: 2000px;
 
-    height: 100%;
-
+  height: 100%;
 }
 
 .nav-logo {
-    align-self: center;
-    justify-self: center;
-    color: white;
-    padding: 0 2.5vw;
-    flex-grow: 2;
-    font-size: 17px;
+  align-self: center;
+  justify-self: center;
+  color: white;
+  padding: 0 2.5vw;
+  flex-grow: 2;
+  font-size: 17px;
 }
 
 .nav-wrapper {
-    display: flex;
-    flex-direction: row;
-    margin: 0 auto;
-    font-size: 14px;
-    color: white;
-    text-align: right;
-    justify-content: flex-end;
-    padding: 0 2vw 0 0;
-    flex-grow: 1;
-    width: 50%;
-
-    min-width: 200px;
-    height: 100%;
-    align-items: center;
-    
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  font-size: 14px;
+  color: white;
+  text-align: right;
+  justify-content: flex-end;
+  padding: 0 0.5vw 0 0;
+  flex-grow: 1;
+  width: 50%;
+  min-width: 200px;
+  height: 100%;
+  align-items: center;
 }
 
 .nav-wrapper ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .nav-wrapper li {
-    display: inline-block;
-    margin: 0.75em;
+  display: inline-block;
+  margin: 0.75em;
 }
 
-
-@media (min-width: 768px)  {
-    .nav-wrapper li {
-        margin: 0 1.5em;
-    }
-    .nav-wrapper {
-        padding: 0 4vw;
-        font-size: 16px;
-    }
-    .nav-logo {
-        padding: 0 3.33vw;
-        font-size: 23px;
-    }
+@media (min-width: 768px) {
+  .nav-wrapper li {
+    margin: 0 1.5em;
+  }
+  .nav-wrapper {
+    padding: 0 4vw;
+    font-size: 16px;
+  }
+  .nav-logo {
+    padding: 0 3.33vw;
+    font-size: 23px;
+  }
 }
