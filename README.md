@@ -1,5 +1,5 @@
 # Start a 🔥App (Client)
-A platform to make causes more personal by utilizing SMS notifications and resource sharing. For activists, it's a platform to subscribe to causes and thought leaders they truly care about get inspired by. For thought leaders, it is a way to engage and activate more people for your cause.
+A platform to make causes more personal by utilizing SMS notifications and resource sharing. For activists, it's a platform to subscribe to causes and thought leaders they truly care about get inspired by. For thought leaders, it is a way to engage and activate more people for your cause. 
 
 ## Inspiration
 This app is inspired by the consistent efforts of the vanguards on the front lines who are seeding the roots of activism in others in order to create lasting structural changes.
@@ -20,6 +20,9 @@ Messages are recieved by subscribers according to the scheduled time
 # Technology Used
 - PostgreSQL
 - Express.js
-- Node.js (node-cron to schedule SMS message sending)
+- Node.js (node-cron to schedule SMS message sending) 
 - React.js
 - (Twillio API)
+
+This is the client repo. Here's a 
+[link](https://saf-textapp-client.jml0123.vercel.app/) to the API repo.
