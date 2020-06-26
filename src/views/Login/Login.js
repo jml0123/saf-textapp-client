@@ -11,13 +11,7 @@ import "./Login.css"
 
 export default class Login extends Component {
 
-    // refactor login form to component 
     state = {error: null}
-
-  
-
-    // Need to create login failed situation
-
     handleSubmit = (e) => {
         e.preventDefault()
         this.setState({error: null})
@@ -31,7 +25,7 @@ export default class Login extends Component {
                 username.value = ''
                 password.value = ''
                 TokenService.saveAuthToken(res.authToken)
-                console.log(res)
+        
                 this.handleLoginSuccess("dashboard")
             }).catch(res => {
                 this.setState({ error: res.error })
@@ -53,7 +47,7 @@ export default class Login extends Component {
             <>
                 <header>
                     <NavBar/>
-                    <Banner heading="🔥" subheading="Keep Up The Momentum" small={true}/>
+                    <Banner heading="🔥" subheading="Keep Up The Momentum"/>
                 </header>
                 <main className="LandingPage">
                 <div className="login-container">
@@ -65,7 +59,7 @@ export default class Login extends Component {
                         <label htmlFor="password">Password</label>
                         <input type="password" id="password" name="password"/>
                         <div className="btn-row">
-                         <button type="button" type="submit">Login</button>
+                         <button type="submit">Login</button>
                         </div>  
                         <p className="sign-up-prompt">Don't have an account? <Link to ="/signup"><span className="signup">Sign up</span></Link></p>
                     </form>

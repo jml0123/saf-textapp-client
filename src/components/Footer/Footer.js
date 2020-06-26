@@ -8,7 +8,7 @@ export default function Footer(props) {
     return (
         <footer>
             <div className="border-gradient">
-                <a href="https://github.com/jml0123" target="_blank">
+                <a href="https://github.com/jml0123" target="_blank" rel="noopener noreferrer">
                     <div className="content-row">
                         <p>made with caffeine</p>
                         <img src="https://cdn.iconscout.com/icon/free/png-512/github-153-675523.png" alt="github logo" className = "icon" />

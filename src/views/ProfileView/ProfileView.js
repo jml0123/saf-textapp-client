@@ -7,26 +7,32 @@ import config from '../../config';
 import "./ProfileView.css"
 
 export default class ProfileView extends Component{
+
+    _isMounted = false;
     state = {
         user: []
     }
     componentDidMount() {
-        fetch(`${config.API_ENDPOINT}/profiles/${this.props.match.params.id}`, {
-          method: 'GET',
-          headers: {
-            'content-type': 'application/json',
+        this._isMounted = true;
+
+
+        if(this._isMounted) {
+            fetch(`${config.API_ENDPOINT}/profiles/${this.props.match.params.id}`, {
+              method: 'GET',
+              headers: {
+                'content-type': 'application/json',
+              }
+            })
+              .then(res => {
+                if (!res.ok) {
+                  throw new Error(res.status)
+                }
+                return res.json()
+              })
+              .then(this.setUser)
+              .catch(error => this.setState({ error }))
           }
-        })
-          .then(res => {
-            if (!res.ok) {
-              throw new Error(res.status)
-            }
-            return res.json()
-          })
-          .then(this.setUser)
-          .catch(error => this.setState({ error }))
-          //console.log(this.state.users)
-      }
+        }
     
       setUser = user => {
         this.setState({

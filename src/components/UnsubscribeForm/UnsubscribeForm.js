@@ -16,7 +16,7 @@ export default class UnsubscribeForm extends Component {
     handleDeleteSubscriber = e => {
         e.preventDefault()
         
-        if (this.validatePhoneNumber(this.phone_number.value) == false) {
+        if (this.validatePhoneNumber(this.phone_number.value) === false) {
             this.setState({result: `Must enter a valid US phone number`})
             return
         }

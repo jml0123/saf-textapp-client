@@ -3,21 +3,37 @@ import config from '../../config';
 import "./ProfileCard.css"
 
 export default class ProfileCard extends Component {
+    _isMounted = false;
 
-    state = {
-        error: null,
-        subscriberCount: null,
-        displayedSubs: null,
+    constructor(props){
+        super(props);
+        this.state = {
+            error: null,
+            subscriberCount: null,
+            displayedSubs: null,
+        }
     }
+
+    async componentDidMount() {
+        this._isMounted = true;
+        if(this._isMounted) {
+            await this.getNumberOfSubs(this.props.curator_id)
+            await this.setRandomSubs()
+        }
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+        this.setState = (state,callback)=>{
+            return;
+        };
+      }
+     
 
     validatePhoneNumber(number){
         const US_PHONE_PATTERN = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
         return US_PHONE_PATTERN.test(number);
     }
-    async componentDidMount() {
-        await this.getNumberOfSubs(this.props.curator_id)
-        await this.setRandomSubs()
-    }
+ 
 
     setRandomSubs = async () =>{
         const subscriberCountRand = 
@@ -63,7 +79,7 @@ export default class ProfileCard extends Component {
     handleAddSubscriber = e => {
         e.preventDefault()
         
-        if (this.validatePhoneNumber(this.phone_number.value) == false) {
+        if (this.validatePhoneNumber(this.phone_number.value) === false) {
             this.setState({result: `Must enter a valid US phone number`})
             return
         }

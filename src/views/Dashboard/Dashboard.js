@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
-import config from '../../config';
-import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-import { Link, Router } from 'react-router-dom';
-import DashNavBar from "../../components/NavBarDash/NavBarDash";
 import MessageList from "../../components/MessageList/MessageList";
-import EditUserForm from "../../components/EditUserForm/EditUserForm";
-import TokenService from '../../services/token-service'
-
 import MessagesContext from "../../MessagesContext"
-import LoginContext from "../../LoginContext"
-
 
 import "./Dashboard.css"
 

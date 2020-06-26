@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch} from 'react-router-dom';
 import config from '../../config';
 import moment from 'moment';
 import TokenService from '../../services/token-service'
 import PrivateRoute from '../../utils/PrivateRoute'
 import DashNavBar from "../../components/NavBarDash/NavBarDash";
-import EditUserForm from "../../components/EditUserForm/EditUserForm";
 import CreateMessage from "../../views/CreateMessage/CreateMessage"
 import Dashboard from "../../views/Dashboard/Dashboard"
 import EditMessage from "../../views/EditMessage/EditMessage"

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import config from '../../config';
-import handleSuccess from '../../utils/Redirects'
 
 import Banner from "../../components/Banner/Banner";
 import NavBar from "../../components/NavBar/NavBar";
@@ -40,7 +38,6 @@ export default class SignUp extends Component {
             profile_description: profileDesc
         })
         .then(user => {
-            console.log(user)
             this.context.updateUserList(user)
             username.value = ''
             password.value = ''
@@ -58,7 +55,6 @@ export default class SignUp extends Component {
 
     // Copy this to a service file (this exists in login too)
     handleRegistrationSuccess = path => {
-        console.log("called")
         const { location, history } = this.props
         const destination = (location.state || {}).from || `/${path}`
         history.push(destination)
@@ -95,7 +91,7 @@ export default class SignUp extends Component {
                         <h1>Sign-Up</h1>
                         <div className="profile-img-container--blank">
                             <div className="profile-img-wrapper--blank">
-                                <img src={profileImg}/>
+                                <img src={profileImg} alt="user-profile"/>
                             </div>
                         </div>
                         <div className="error-msg"><p>{this.state.error}</p></div>
@@ -105,11 +101,11 @@ export default class SignUp extends Component {
                         <input type="password" id="password" name="password" placeholder="8+ characters"/>
                         <label htmlFor="full_name">Full Name</label>
                         <input type="text" id="full_name" name="full_name"/>
-                        <label htmlFor="profile_img_link" >Link a profile image here (must be hosted online)</label>
-                        <input type="text" id="profile_img_link" placeholder="(e.g. https://i.ya-webdesign.com/images/profile-avatar-png-15.png)" name="profile_img_link" onChange={e => this.changeImageState(e)}/>
+                        <label htmlFor="profile_img_link">Link a profile image here (must be hosted online)</label>
+                        <input type="text" id="profile_img_link" name="profile_img_link" placeholder="(e.g. https://i.ya-webdesign.com/images/profile-avatar-png-15.png)"  onChange={e => this.changeImageState(e)}/>`
                         <label htmlFor="profile_description">Activist Bio</label>
                         <textarea id="profile_description" rows="4" cols="40" form="register" name="profile_description" placeholder="How do you want the world to see you?"></textarea>
-                        <button type="button" type="submit">Submit</button>
+                        <button type="submit">Submit</button>
                     </form>
                 </div>
                 </main>

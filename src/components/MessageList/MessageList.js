@@ -3,11 +3,8 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import MessagesContext from "../../MessagesContext"
-import monthNames from "../../utils/Months"
-import dayNames from "../../utils/Days"
 
 import "./MessageList.css"
-import LoginContext from '../../LoginContext';
 
 export default class MessageList extends Component {
     
@@ -19,9 +16,6 @@ export default class MessageList extends Component {
         let d = moment(date);
         d = moment(d, "YYYY-MM-DDTHH:mm:ssZ")
         const today = moment().format()
-        //(moment(d).format("DD"))
-        //console.log(moment(today).format("DD"))
-
 
         return moment(d).format("DD") === moment(today).format("DD") &&
             moment(d).format("MM") === moment(today).format("MM") &&
@@ -39,15 +33,13 @@ export default class MessageList extends Component {
     getTime = (date) =>{
         let d = moment(date);
         d =  moment.utc(d).local().format("YYYY-MM-DDTHH:mm:ssZ")
-        //console.log(d.format())
-        //return `${d.format()}`;
+
         return moment(d).format('LT');
     }
 
     convertToString = (date) => {
         let d = moment(date);
         d = moment.utc(d).local().format("YYYY-MM-DDTHH:mm:ssZ")
-        //console.log(d)
         
         if (this.isToday(d)) {
             return "Today"
@@ -56,9 +48,6 @@ export default class MessageList extends Component {
         if (this.isTomorrow(d)) {
             return "Tomorrow"
         }
-
-        //console.log(d.format())
-        //return `${d.format()}`;
 
         return `${moment(d).format('dddd')}, ${moment(d).format('MMMM DD')}`;
     }
@@ -76,7 +65,8 @@ export default class MessageList extends Component {
                 dates.sort();
         }
         getDates();
-
+        
+        // eslint-disable-next-line
         messageGroup = dates.reduce((date1, date2) => (date1[date2] = [], date1), {});
         
         (this.context.messages).forEach(message =>{

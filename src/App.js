@@ -5,13 +5,12 @@ import config from './config';
 import LandingPage from "./views/LandingPage/LandingPage"
 import Login from "./views/Login/Login"
 import SignUp from "./views/SignUp/SignUp"
-import CreateMessage from "./views/CreateMessage/CreateMessage"
-import EditMessage from "./views/EditMessage/EditMessage"
+
 import Admin from "./components/Admin/Admin"
 
-import MessagesContext from "./MessagesContext"
+
 import UsersContext from "./UsersContext"
-import LoginContext from "./LoginContext"
+
 
 import ProfileView from './views/ProfileView/ProfileView';
 
@@ -52,7 +51,6 @@ class App extends Component {
   }
 
   updateUserList = newUser => {
-    console.log(newUser)
     this.setState({
       ...this.state.error,
       users: [...this.state.users, newUser],
