@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import config from '../../config';
 import "./ProfileCard.css"
+import DefaultAvatar from "../../assets/avatar-placeholder.png"
 
 export default class ProfileCard extends Component {
     _isMounted = false;
@@ -127,7 +128,7 @@ export default class ProfileCard extends Component {
         const subscribers = (parseInt(this.state.subscriberCount) !== 0 || this.props.demo) ? this.state.subscriberCount : this.state.displayedSubs
 
         const userImg = (this.props.profileImg === null)? 
-            "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
+            {DefaultAvatar}
             : this.props.profileImg
         return (
             <div className="curator-container">
@@ -147,8 +148,10 @@ export default class ProfileCard extends Component {
                 <div className="phone-num-container">
                     <form onSubmit = {this.handleAddSubscriber}>
                         <div className="phone-num-input">
-                            <input type="text" value="+1" className="country-code" readOnly/>
-                            <input type="text" placeholder="XXX-XXX-XXXX" ref={input => this.phone_number = input} name="phone_number"/>
+                            <label htmlFor="country-code"></label>
+                            <input type="text" value="+1" className="country-code" id="country-code" readOnly/>
+                            <label htmlFor="phone-number"></label>
+                            <input type="text" id="phone-number" placeholder="XXX-XXX-XXXX" ref={input => this.phone_number = input} name="phone_number"/>
                         </div>
                         <button className="phone-commit-btn" type="submit">{(this.state.result) ? "Subscribed!" : "Subscribe"}</button>
                     </form>
@@ -161,5 +164,5 @@ export default class ProfileCard extends Component {
 }
 
 ProfileCard.defaultProps = {
-    "profileImg": "https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
+    "profileImg": {DefaultAvatar}
 }
