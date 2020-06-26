@@ -70,7 +70,7 @@ export default class MessageList extends Component {
     getDates();
 
     messageGroup = dates.reduce(
-    // eslint-disable-next-line
+      // eslint-disable-next-line
       (date1, date2) => ((date1[date2] = []), date1),
       {}
     );
