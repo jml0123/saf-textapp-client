@@ -4,7 +4,7 @@ import config from '../../config';
 import TokenService from '../../services/token-service'
 
 import MessagesContext from "../../MessagesContext"
-import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
+import { withRouter } from 'react-router-dom';
 
 import "./MessageForm.css"
 
