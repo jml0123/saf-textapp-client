@@ -56,6 +56,8 @@
   display: inline-block;
   min-width: 100%;
   text-align: left;
+  line-height: 1.25em;
+  padding: 1.17%;
 }
 
 .curator-profile-heading {
@@ -148,5 +150,12 @@ form textarea {
   }
   .phone-num-container {
     padding-right: 10%;
+  }
+
+  .curator-profile p {
+    min-width: 0%;
+    max-width: 80%;
+    width: 75%;
+    padding: 0;
   }
 }
