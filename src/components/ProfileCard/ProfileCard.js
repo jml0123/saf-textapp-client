@@ -169,7 +169,10 @@ export default class ProfileCard extends Component {
                 {this.state.result ? "Subscribed!" : "Subscribe"}
               </button>
             </form>
-            <div className="result-container">{this.state.result}</div>
+            <div className="result-container">
+              {this.state.result}
+              <i>{this.state.error ? this.state.error.error.message : null}</i>
+            </div>
           </div>
         </div>
       </div>
